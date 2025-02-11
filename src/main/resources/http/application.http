@@ -1,0 +1,87 @@
+### Create Application
+POST http://localhost:8080/application
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkyNTQzNjYsImV4cCI6MTczOTM0MDc2Nn0.njZD1PvMNojW18-0fiJ044tpNAuB62gFD8ZFg4rn64w
+
+{
+  "title": "Sample Application",
+  "description": "This is a test application",
+  "departmentId": 1,
+  "offeringId": 3
+}
+
+### Get All Applications
+GET http://localhost:8080/application/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxNzc2OTMsImV4cCI6MTczOTI2NDA5M30.ogEHGBhfx3hlamv5gGOfcIcT6rpvW5aSInC0HLyhhD0
+
+
+### Get Application by ID
+GET http://localhost:8080/application/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxNzc2OTMsImV4cCI6MTczOTI2NDA5M30.ogEHGBhfx3hlamv5gGOfcIcT6rpvW5aSInC0HLyhhD0
+
+### Get Applications by Created By
+GET http://localhost:8080/application/createdBy
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxNzc2OTMsImV4cCI6MTczOTI2NDA5M30.ogEHGBhfx3hlamv5gGOfcIcT6rpvW5aSInC0HLyhhD0
+
+### Get Applications by Assigned To
+GET http://localhost:8080/application/assignedTo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkyNTQzNjYsImV4cCI6MTczOTM0MDc2Nn0.njZD1PvMNojW18-0fiJ044tpNAuB62gFD8ZFg4rn64w
+
+
+### Get Applications by Department ID
+GET http://localhost:8080/application/1/department
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxNzc2OTMsImV4cCI6MTczOTI2NDA5M30.ogEHGBhfx3hlamv5gGOfcIcT6rpvW5aSInC0HLyhhD0
+
+
+### Get Applications by Status
+GET http://localhost:8080/application/SET/status
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkyNTQzNjYsImV4cCI6MTczOTM0MDc2Nn0.njZD1PvMNojW18-0fiJ044tpNAuB62gFD8ZFg4rn64w
+
+### Update Assigned To
+PUT http://localhost:8080/application/1/assignedTo
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkyNTQzNjYsImV4cCI6MTczOTM0MDc2Nn0.njZD1PvMNojW18-0fiJ044tpNAuB62gFD8ZFg4rn64w
+
+
+{
+  "assignedToId" : 1
+}
+### Update Status
+PUT http://localhost:8080/application/1/status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkyNTQzNjYsImV4cCI6MTczOTM0MDc2Nn0.njZD1PvMNojW18-0fiJ044tpNAuB62gFD8ZFg4rn64w
+
+{
+  "status": "COMPLETED"
+}
+
+
+### Update Application
+PUT http://localhost:8080/application/1
+Content-Type: application/json
+
+{
+  "name": "Updated Application",
+  "description": "Updated description"
+}
+
+### Soft Delete (Wipe Visibility)
+PATCH http://localhost:8080/application/1/wipe
+Content-Type: application/json
+
+true
+
+### Delete Application by ID
+DELETE http://localhost:8080/application/1
+
+### Pagination
+GET http://localhost:8080/application/paged?page=1&size=10
+
+### Filter Applications
+POST http://localhost:8080/application/filter?page=1&size=30
+Content-Type: application/json
+
+{
+  "status": "PENDING",
+  "departmentId": 2
+}
