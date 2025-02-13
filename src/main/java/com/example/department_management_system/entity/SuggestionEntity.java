@@ -29,7 +29,7 @@ public class SuggestionEntity {
     @JoinColumn(name = "department_id", nullable = false)
     private DepartmentEntity department;
     @Column(name = "visible", columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private Boolean visible;                /// korinishi
+    private Boolean visible;                                        /// korinishi
 
     public Integer getId() {
         return id;

@@ -8,10 +8,10 @@ public class OfferingFilterDTO {
     private Boolean status;                                     /// Xolati (Ishlayabdi yoki to'xtatilgan)
     private String title;                                       /// Xizmat nomi
     private String description;                                 /// Tavsifi
-    private LocalDate createdDateFrom;                                    /// Yaratilgan sanasi
-    private LocalDate createdDateTo;                                    /// Yaratilgan sanasi
-    private LocalDate updatedDateFrom;                                    /// Yangilangan sanasi
-    private LocalDate updatedDateTo;                                    /// Yangilangan sanasi
+    private LocalDate createdDateFrom;                          /// Yaratilgan sanasi
+    private LocalDate createdDateTo;                            /// Yaratilgan sanasi
+    private LocalDate updatedDateFrom;                          /// Yangilangan sanasi
+    private LocalDate updatedDateTo;                            /// Yangilangan sanasi
     private Integer departmentId;                               /// Bo'lim IDsi
     private List<Integer> applicationIds;                       /// Xizmatga bog'langan arizalar IDlari
     private Boolean visible;

@@ -16,9 +16,9 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;                                                 /// Id si
-    @Column(name = "name", nullable = false)                                              /// Ismi
+    @Column(name = "name", nullable = false)                            /// Ismi
     private String name;
-    @Column(name = "surname", nullable = false)                                           /// Familyasi
+    @Column(name = "surname", nullable = false)                         /// Familyasi
     private String surname;
     @Column(name = "email", nullable = false)
     private String email;
@@ -44,7 +44,7 @@ public class EmployeeEntity {
     @OneToMany(mappedBy = "assignedTo", fetch = FetchType.LAZY)
     private List<ApplicationEntity> assignedApplications;               /// Xodimga tayinlangan arizalar
     @Column(name = "visible", columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private Boolean visible;                /// korinishi
+    private Boolean visible;                                            /// korinishi
 
 
 

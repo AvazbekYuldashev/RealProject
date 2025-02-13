@@ -10,9 +10,9 @@ public class ApplicationFilterDTO {
     private String title;                   /// Ariza turi
     private String description;             /// Ariza matni
     private LocalDate createdDateFrom;      /// Ariza yaratilgan sanasi
-    private LocalDate createdDateTo;      /// Ariza yaratilgan sanasi
+    private LocalDate createdDateTo;        /// Ariza yaratilgan sanasi
     private LocalDate updatedDateFrom;      /// Ariza o'zgartirilgan sanasi
-    private LocalDate updatedDateTo;      /// Ariza o'zgartirilgan sanasi
+    private LocalDate updatedDateTo;        /// Ariza o'zgartirilgan sanasi
     private Integer offeringId;             /// Xizmat ID
     private Integer createdById;            /// Arizani yuborgan xodim ID
     private Integer assignedToId;           /// Arizani ko'rib chiqadigan xodim ID

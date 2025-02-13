@@ -2,8 +2,10 @@ package com.example.department_management_system.controller;
 
 import com.example.department_management_system.dto.EmployeeDTO;
 import com.example.department_management_system.dto.EmployeeFilterDTO;
+import com.example.department_management_system.dto.EmployeeUpdateDTO;
 import com.example.department_management_system.mapper.EmployeeMapper;
 import com.example.department_management_system.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
@@ -41,6 +43,13 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeMapper> getById(@PathVariable("id") Integer id) {
         EmployeeMapper byId = employeeService.getById(id);
+        return new ResponseEntity<>(byId, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @GetMapping("/getMe")
+    public ResponseEntity<EmployeeMapper> getMe() {
+        EmployeeMapper byId = employeeService.getMe();
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
@@ -87,15 +96,22 @@ public class EmployeeController {
     /// Update
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Boolean> updateEmployee(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
-        Boolean isUpdated = employeeService.updateEmployee(id, employeeDTO);
+    public ResponseEntity<Boolean> updateEmployee(@Valid @PathVariable Integer id, @RequestBody EmployeeUpdateDTO employeeUpdateDTO) {
+        Boolean isUpdated = employeeService.updateEmployee(id, employeeUpdateDTO);
         return new ResponseEntity<>(isUpdated, isUpdated ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}/wipe")
-    public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody EmployeeDTO employeeDTO) {
-        Boolean isUpdate = employeeService.deleteWipe(id, employeeDTO.getVisible());
+    public ResponseEntity<?> deleteWipeA(@PathVariable("id") Integer id, @RequestBody EmployeeDTO employeeDTO) {
+        Boolean isUpdate = employeeService.deleteWipeA(id, employeeDTO.getVisible());
+        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PutMapping("/wipe")
+    public ResponseEntity<?> deleteWipe() {
+        Boolean isUpdate = employeeService.deleteWipe();
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
 

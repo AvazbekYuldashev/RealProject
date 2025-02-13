@@ -2,7 +2,6 @@ package com.example.department_management_system.util;
 
 
 import com.example.department_management_system.config.CustomUserDetails;
-import com.example.department_management_system.enums.EmployeeRole;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,0 +1,49 @@
+### Taklif yaratish
+POST http://localhost:8080/suggestion
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInZpc2libGUiOnRydWUsInN1cm5hbWUiOiJEb2UiLCJuYW1lIjoiSm9obiIsImlkIjozLCJwb3NpdGlvbiI6IlNvZnR3YXJlIEVuZ2luZWVyIiwiZW1haWwiOiJqb2huLmRvQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb0BleGFtcGxlLmNvbSIsImlhdCI6MTczOTAwNzMwOCwiZXhwIjoxNzM5MDkzNzA4fQ.lEJpR9IFLEAns1OoXuLMnJaGEEw6FptYMQg1sCHCYYQ
+
+{
+  "title": "New Suggestion",
+  "description": "This is a test suggestion",
+  "assignedToId": 1
+}
+
+### Barcha takliflarni olish
+GET http://localhost:8080/suggestion/all
+
+### ID bo'yicha taklifni olish
+GET http://localhost:8080/suggestion/1
+
+### Yaratilgan foydalanuvchi bo'yicha takliflarni olish
+GET http://localhost:8080/suggestion/1/createdBy
+
+### Taklifni yangilash
+PUT http://localhost:8080/suggestion/1/suggestion
+Content-Type: application/json
+
+{
+  "title": "Updated Suggestion",
+  "description": "Updated description"
+}
+
+### Taklifni vaqtincha yashirish
+PATCH http://localhost:8080/suggestion/1/wipe
+Content-Type: application/json
+
+true
+
+### Taklifni o'chirish
+DELETE http://localhost:8080/suggestion/1
+
+### Takliflarni sahifalab olish
+GET http://localhost:8080/suggestion/paged?page=1&size=10
+
+### Filtr bo'yicha takliflarni olish
+POST http://localhost:8080/suggestion/filter?page=1&size=10
+Content-Type: application/json
+
+{
+  "title": "Suggestion",
+  "createdBy": 1
+}

@@ -1,0 +1,102 @@
+### Create Employee
+POST http://localhost:8080/employee
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0NDA4MTQsImV4cCI6MTczOTUyNzIxNH0.qgodvrJiHVFSguTnF4XXiNeWHtdnJSaMzx8hZh3zrrs
+
+{
+  "name": "John",
+  "surname": "Doe",
+  "role": "USER",
+  "position": "Software Engineer",
+  "status": "ACTIVE",
+  "email": "johns.does@example.com",
+  "password": "securePassword",
+  "departmentId": 1
+}
+
+### Get All Employees
+GET http://localhost:8080/employee/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkyNTQzNjYsImV4cCI6MTczOTM0MDc2Nn0.njZD1PvMNojW18-0fiJ044tpNAuB62gFD8ZFg4rn64w
+
+### Get Employee By ID
+GET http://localhost:8080/employee/12
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0NDA4MTQsImV4cCI6MTczOTUyNzIxNH0.qgodvrJiHVFSguTnF4XXiNeWHtdnJSaMzx8hZh3zrrs
+
+### Get Employees By Department
+GET http://localhost:8080/employee/1/department
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxMDE2OTgsImV4cCI6MTczOTE4ODA5OH0.ax8J2oFlSGgG1Wyfa1tQnmnOh3HjLve8UJQyjitMnW8
+
+
+### Update Employee Role
+PUT http://localhost:8080/employee/2/role
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkwMDQ0MjUsImV4cCI6MTczOTA5MDgyNX0.1jLmJQptcEEASvJAdmBBVSz9atVL4W-r0Gpuc8vjPCg
+
+{
+  "role": "USER"
+}
+
+### Update Employee Position
+PUT http://localhost:8080/employee/2/position
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkwMDQ0MjUsImV4cCI6MTczOTA5MDgyNX0.1jLmJQptcEEASvJAdmBBVSz9atVL4W-r0Gpuc8vjPCg
+
+
+{
+  "position": "Senior Software Engineer"
+}
+
+### Update Employee Status
+PUT http://localhost:8080/employee/2/status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkwMDQ0MjUsImV4cCI6MTczOTA5MDgyNX0.1jLmJQptcEEASvJAdmBBVSz9atVL4W-r0Gpuc8vjPCg
+
+{
+  "status": "BLOCKED"
+}
+
+### Update Employee Department
+PUT http://localhost:8080/employee/2/department
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxMDE2OTgsImV4cCI6MTczOTE4ODA5OH0.ax8J2oFlSGgG1Wyfa1tQnmnOh3HjLve8UJQyjitMnW8
+
+{
+  "departmentId": 1
+}
+
+### Update Employee
+PUT http://localhost:8080/employee/12
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0NDA4MTQsImV4cCI6MTczOTUyNzIxNH0.qgodvrJiHVFSguTnF4XXiNeWHtdnJSaMzx8hZh3zrrs
+
+{
+  "name": "  ",
+  "surname": "Smith",
+  "position": "Lead Engineer"
+}
+
+### Soft Delete Employee
+PUT http://localhost:8080/employee/2/wipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzg5NTMxNTAsImV4cCI6MTczOTAzOTU1MH0.nBt3NWPpHpQuwgJIPiWjKERWVrzO1j83wcTPDsaQjIY
+
+{
+  "visible": true
+}
+
+### Hard Delete Employee
+DELETE http://localhost:8080/employee/2/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzg5NTMxNTAsImV4cCI6MTczOTAzOTU1MH0.nBt3NWPpHpQuwgJIPiWjKERWVrzO1j83wcTPDsaQjIY
+
+### Get Paginated Employees
+GET http://localhost:8080/employee/paged?page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzg5NTMxNTAsImV4cCI6MTczOTAzOTU1MH0.nBt3NWPpHpQuwgJIPiWjKERWVrzO1j83wcTPDsaQjIY
+
+### Filter Employees
+POST http://localhost:8080/employee/filter?page=1&size=10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzg5NTMxNTAsImV4cCI6MTczOTAzOTU1MH0.nBt3NWPpHpQuwgJIPiWjKERWVrzO1j83wcTPDsaQjIY
+
+{
+
+}

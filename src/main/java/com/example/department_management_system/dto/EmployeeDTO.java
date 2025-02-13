@@ -11,14 +11,13 @@ public class EmployeeDTO {
     private Integer id;                                                   /// Id si
     private String name;                                                  /// Ismi
     private String surname;                                               /// Familyasi
-
     private EmployeeRole role;                                            /// Roli
-    private String position;                                    /// Lavozimi
+    private String position;                                              /// Lavozimi
     private EmployeeStatus status;                                        /// Statusi (Blok yoki aktiv)
     private LocalDateTime createdDate;                                    /// Yaratilgan sanasi
     private LocalDateTime updatedDate;                                    /// Yangilangan sanasi
     private Integer departmentId;                                         /// Bo'lim IDsi
-    private Boolean visible;                /// korinishi
+    private Boolean visible;                                              /// korinishi
     private String email;
     private String password;
 

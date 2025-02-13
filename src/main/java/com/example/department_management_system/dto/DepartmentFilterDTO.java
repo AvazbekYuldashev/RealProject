@@ -10,23 +10,23 @@ import java.util.List;
 
 ///  Bolim
 public class DepartmentFilterDTO {
-    private Integer id;                                 /// Id
-    private DepartmentStatus status;                    /// Xozirgi xolati
-    private String title;                               /// Bo'lim nomi
-    private String description;                         /// Bo'lim xaqida qisqacha
-    private LocalDate createdDateFrom;                  /// Yaratilgan sanasi
+    private Integer id;                                     /// Id
+    private DepartmentStatus status;                        /// Xozirgi xolati
+    private String title;                                   /// Bo'lim nomi
+    private String description;                             /// Bo'lim xaqida qisqacha
+    private LocalDate createdDateFrom;                      /// Yaratilgan sanasi
     private LocalDate createdDateTo;
-    private LocalDate updatedDateFrom;                  /// Yangilangan sanasi
+    private LocalDate updatedDateFrom;                      /// Yangilangan sanasi
     private LocalDate updatedDateTo;
-    private String address;                             /// Bo'lim manzili
-    private String phoneNumber;                         /// Bo'lim telefon raqami
-    private String headOfDepartment;                    /// Bo'lim boshlig'ining ismi yoki ID-si
-    private DepartmentType type;                        /// Bo'lim turi (masalan, "Akademik", "Texnik")
+    private String address;                                 /// Bo'lim manzili
+    private String phoneNumber;                             /// Bo'lim telefon raqami
+    private String headOfDepartment;                        /// Bo'lim boshlig'ining ismi yoki ID-si
+    private DepartmentType type;                            /// Bo'lim turi (masalan, "Akademik", "Texnik")
     private List<EmployeeDTO> employeeIds;                  /// Bo'lim tarkibidagi xodimlar IDlari
     private List<OfferingDTO> offeringIds;                  /// Bo'lim tarkibidagi xizmatlar IDlari
-    private List<ApplicationDTO> applicationIds;               /// Bo'limga kelgan arizalar IDlari
-    private List<SuggestionDTO> suggestionIds;                /// Bo'limga kelgan takliflar IDlari
-    private List<CompletedWorkDTO> completedWorkIds;             /// Bo'limda bajarilgan ishlar IDlari
+    private List<ApplicationDTO> applicationIds;            /// Bo'limga kelgan arizalar IDlari
+    private List<SuggestionDTO> suggestionIds;              /// Bo'limga kelgan takliflar IDlari
+    private List<CompletedWorkDTO> completedWorkIds;        /// Bo'limda bajarilgan ishlar IDlari
     private Boolean visible;
 
     public DepartmentFilterDTO(){}

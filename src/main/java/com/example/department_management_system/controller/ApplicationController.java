@@ -6,6 +6,7 @@ import com.example.department_management_system.dto.ApplicationFilterDTO;
 import com.example.department_management_system.enums.ApplicationStatus;
 import com.example.department_management_system.mapper.ApplicationMapper;
 import com.example.department_management_system.service.ApplicationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class ApplicationController {
     /// Create
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("")
-    public ResponseEntity<ApplicationDTO> createApplication(@RequestBody ApplicationDTO applicationDTO) {
+    public ResponseEntity<ApplicationDTO> createApplication(@Valid @RequestBody ApplicationDTO applicationDTO) {
         ApplicationDTO savedApplication = applicationService.saveApplication(applicationDTO);
         return new ResponseEntity<>(savedApplication, HttpStatus.CREATED);
     }

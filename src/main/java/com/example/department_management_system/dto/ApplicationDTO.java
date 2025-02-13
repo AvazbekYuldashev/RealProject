@@ -2,6 +2,8 @@ package com.example.department_management_system.dto;
 
 
 import com.example.department_management_system.enums.ApplicationStatus;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -9,13 +11,16 @@ import java.time.LocalDateTime;
 public class ApplicationDTO {
 
     private Integer id;                     /// ID
+    @NotBlank(message = "Title required")
     private String title;                   /// Ariza turi
+    @NotBlank(message = "Description required")
     private String description;             /// Ariza matni
     private LocalDateTime createdDate;      /// Ariza yaratilgan sanasi
     private LocalDateTime updatedDate;      /// Ariza o'zgartirilgan sanasi
     private Integer offeringId;             /// Xizmat ID
     private Integer createdById;            /// Arizani yuborgan xodim ID
     private Integer assignedToId;           /// Arizani ko'rib chiqadigan xodim ID
+    @NotBlank(message = "Department Id required")
     private Integer departmentId;           /// Ariza yuborilayotgan bo'lim ID
     private ApplicationStatus status;       /// Ariza xolati
     private Integer completedWorkId;        /// Ariza bajarilganligi xaqida ma'lumot

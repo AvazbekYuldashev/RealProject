@@ -1,0 +1,31 @@
+### Registration API Test
+POST http://localhost:8080/profile/registration
+Content-Type: application/json
+
+{
+  "name": "John",
+  "surname": "Doe",
+  "role": "ADMIN",
+  "position": "Software Developer",
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+
+### Authorization API Test
+POST http://localhost:8080/profile/authorization
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+
+### Authorization API Test
+POST http://localhost:8080/profile/authorization
+Content-Type: application/json
+
+{
+  "email": "GREED@GMAIL.COM",
+  "password": "GREED1212"
+}
+

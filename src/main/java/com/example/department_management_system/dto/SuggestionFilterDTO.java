@@ -9,10 +9,10 @@ public class SuggestionFilterDTO {
     private String description;                              /// Taklif tavsifi
     private Integer createdById;                             /// Taklifni yaratgan xodim IDsi
     private Integer assignedToId;                            /// Taklifni qabul qilgan bo'lim IDsi
-    private LocalDate createdDateFrom;                                    /// Yaratilgan sanasi
-    private LocalDate createdDateTo;                                    /// Yaratilgan sanasi
-    private LocalDate updatedDateFrom;                                    /// Yangilangan sanasi
-    private LocalDate updatedDateTo;                                    /// Yangilangan sanasi
+    private LocalDate createdDateFrom;                       /// Yaratilgan sanasi
+    private LocalDate createdDateTo;                         /// Yaratilgan sanasi
+    private LocalDate updatedDateFrom;                       /// Yangilangan sanasi
+    private LocalDate updatedDateTo;                         /// Yangilangan sanasi
     private Boolean visible;
     private Integer departmentId;
 
