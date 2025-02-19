@@ -40,7 +40,6 @@ public class EmployeeService {
     private DepartmentRepository departmentRepository;
 
     public EmployeeEntity getByIdEntity(Integer id) {
-        checkAdminAccess();
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new AppBadRequestExeption("Employee not found with id: " + id));
     }

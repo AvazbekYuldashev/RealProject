@@ -5,9 +5,9 @@ Content-Type: application/json
 {
   "name": "John",
   "surname": "Doe",
-  "role": "ADMIN",
+  "role": "USER",
   "position": "Software Developer",
-  "email": "john.doe@example.com",
+  "email": "Greed@example.com",
   "password": "securePassword123"
 }
 
@@ -16,7 +16,7 @@ POST http://localhost:8080/profile/authorization
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
+  "email": "Greed@example.com",
   "password": "securePassword123"
 }
 
