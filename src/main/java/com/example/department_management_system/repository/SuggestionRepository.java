@@ -21,19 +21,19 @@ public interface SuggestionRepository extends JpaRepository<SuggestionEntity, In
     @Query("SELECT s.id as id, s.title as title, s.description as description, u.id as createdById, " +
             "e.id as assignedTo, s.createdDate as createdDate, s.updatedDate as updatedDate " +
             "FROM SuggestionEntity s LEFT JOIN s.createdBy u LEFT JOIN s.assignedTo e " +
-            "WHERE s.visible = true")
+            "WHERE s.visible = true order by s.createdDate desc")
     List<SuggestionMapper> findAllMapper();
 
     @Query("SELECT s.id as id, s.title as title, s.description as description, u.id as createdById, " +
             "e.id as assignedTo, s.createdDate as createdDate, s.updatedDate as updatedDate " +
             "FROM SuggestionEntity s LEFT JOIN s.createdBy u LEFT JOIN s.assignedTo e " +
-            "WHERE s.id = :idP AND s.visible = true")
+            "WHERE s.id = :idP AND s.visible = true order by s.createdDate desc")
     Optional<SuggestionMapper> findByIdMapper(@Param("idP") Integer id);
 
     @Query("SELECT s.id as id, s.title as title, s.description as description, u.id as createdById, " +
             "e.id as assignedTo, s.createdDate as createdDate, s.updatedDate as updatedDate " +
             "FROM SuggestionEntity s LEFT JOIN s.createdBy u LEFT JOIN s.assignedTo e " +
-            "WHERE s.createdBy.id = :createdById AND s.visible = true")
+            "WHERE s.createdBy.id = :createdById AND s.visible = true order by s.createdDate desc")
     List<SuggestionMapper> findByCreatedByMapper(@Param("createdById") Integer createdBy);
 
     @Modifying
@@ -66,7 +66,7 @@ public interface SuggestionRepository extends JpaRepository<SuggestionEntity, In
 
     @Query("SELECT s.id as id, s.title as title, s.description as description, u.id as createdById, e.id as assignedTo, " +
             "s.createdDate as createdDate, s.updatedDate as updatedDate " +
-            "FROM SuggestionEntity s LEFT JOIN s.createdBy u LEFT JOIN s.assignedTo e WHERE s.visible = true")
+            "FROM SuggestionEntity s LEFT JOIN s.createdBy u LEFT JOIN s.assignedTo e WHERE s.visible = true order by s.createdDate desc")
     Page<SuggestionMapper> findAllPageble(Pageable pageable);
 
 }

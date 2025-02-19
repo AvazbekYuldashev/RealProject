@@ -23,7 +23,7 @@ public interface CompletedWorkRepository extends JpaRepository<CompletedWorkEnti
             "LEFT JOIN c.application a " +
             "LEFT JOIN c.department d " +
             "LEFT JOIN c.employee e " +
-            "WHERE c.visible = true")
+            "WHERE c.visible = true order by c.createdDate desc")
     List<CompletedWorkMapper> findAllMapper();
 
     @Query("SELECT c.id as id, c.createdDate as createdDate, c.updatedDate as updatedDate, c.application.id as applicationId, c.department.id as departmentId, c.employee.id as employeeId " +
@@ -31,7 +31,7 @@ public interface CompletedWorkRepository extends JpaRepository<CompletedWorkEnti
             "LEFT JOIN c.application a " +
             "LEFT JOIN c.department d " +
             "LEFT JOIN c.employee e " +
-            "WHERE c.id = :idP AND c.visible = true")
+            "WHERE c.id = :idP AND c.visible = true order by c.createdDate desc")
     Optional<CompletedWorkMapper> findByIdMapper(@Param("idP") Integer id);
 
     @Query("SELECT c.id as id, c.createdDate as createdDate, c.updatedDate as updatedDate, c.application.id as applicationId, c.department.id as departmentId, c.employee.id as employeeId " +
@@ -39,7 +39,7 @@ public interface CompletedWorkRepository extends JpaRepository<CompletedWorkEnti
             "LEFT JOIN c.application a " +
             "LEFT JOIN c.department d " +
             "LEFT JOIN c.employee e " +
-            "WHERE c.application.id = :applicationIdP AND c.visible = true")
+            "WHERE c.application.id = :applicationIdP AND c.visible = true order by c.createdDate desc")
     List<CompletedWorkMapper> findByApplicationMapper(@Param("applicationIdP") Integer applicationId);
 
     @Query("SELECT c.id as id, c.createdDate as createdDate, c.updatedDate as updatedDate, c.application.id as applicationId, c.department.id as departmentId, c.employee.id as employeeId " +
@@ -47,7 +47,7 @@ public interface CompletedWorkRepository extends JpaRepository<CompletedWorkEnti
             "LEFT JOIN c.application a " +
             "LEFT JOIN c.department d " +
             "LEFT JOIN c.employee e " +
-            "WHERE c.department.id = :departmentIdP AND c.visible = true")
+            "WHERE c.department.id = :departmentIdP AND c.visible = true order by c.createdDate desc")
     List<CompletedWorkMapper> findByDepartmentIdMapper(@Param("departmentIdP") Integer departmentId);
 
     @Query("SELECT c.id as id, c.createdDate as createdDate, c.updatedDate as updatedDate, c.application.id as applicationId, c.department.id as departmentId, c.employee.id as employeeId " +
@@ -55,7 +55,7 @@ public interface CompletedWorkRepository extends JpaRepository<CompletedWorkEnti
             "LEFT JOIN c.application a " +
             "LEFT JOIN c.department d " +
             "LEFT JOIN c.employee e " +
-            "WHERE c.employee.id = :employeeIdP AND c.visible = true")
+            "WHERE c.employee.id = :employeeIdP AND c.visible = true order by c.createdDate desc")
     List<CompletedWorkMapper> findByEmployeeIdMapper(@Param("employeeIdP") Integer employeeId);
 
     @Query("SELECT c.id as id, c.createdDate as createdDate, c.updatedDate as updatedDate, a.id as applicationId, " +
@@ -64,21 +64,12 @@ public interface CompletedWorkRepository extends JpaRepository<CompletedWorkEnti
             "LEFT JOIN c.application a " +
             "LEFT JOIN c.department d " +
             "LEFT JOIN c.employee e " +
-            "WHERE c.visible = true")
+            "WHERE c.visible = true order by c.createdDate desc")
     Page<CompletedWorkMapper> findAllPageble(Pageable pageable);
 
-    @Query("FROM CompletedWorkEntity WHERE id = :idP AND visible = true")
+    @Query("FROM CompletedWorkEntity WHERE id = :idP AND visible = true order by createdDate desc")
     Optional<CompletedWorkEntity> findById(@Param("idP") Integer id);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE CompletedWorkEntity set application.id = :applicationIdP, updatedDate = :updatedDateP where id = :idP and visible = true ")
-    int updateApplication(@Param("idP") Integer id, @Param("applicationIdP") Integer applicationId, @Param("updatedDateP") LocalDateTime updatedDateP);
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE CompletedWorkEntity set department.id = :departmentIdP, updatedDate = :updatedDateP where id = :idP and visible = true ")
-    int updateDepartment(@Param("idP") Integer id, @Param("departmentIdP") Integer departmentId, @Param("updatedDateP") LocalDateTime updatedDateP);
 
     @Modifying
     @Transactional

@@ -1,13 +1,13 @@
 ### Create Application
 POST http://localhost:8080/application
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0Mjc5MjUsImV4cCI6MTczOTUxNDMyNX0.xMhifXxprPuSXdZX0AK32Gz9Oc4T6WKzl8lqBkccv9I
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk5Nzc2MzIsImV4cCI6MTc0MDA2NDAzMn0.J8pcUZ0da5mBaxgLwevjMUvwajHgO1OKIHsWW8uVfcM
 
 {
-
-  "description": "This is a test application",
+  "title": "asdasd",
+  "description": "xfesfesfe",
   "departmentId": 1,
-  "offeringId": 3
+  "offeringId": 1
 }
 
 ### Get All Applications

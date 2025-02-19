@@ -20,7 +20,7 @@ public class ApplicationDTO {
     private Integer offeringId;             /// Xizmat ID
     private Integer createdById;            /// Arizani yuborgan xodim ID
     private Integer assignedToId;           /// Arizani ko'rib chiqadigan xodim ID
-    @NotBlank(message = "Department Id required")
+    @NotNull(message = "Department Id required")
     private Integer departmentId;           /// Ariza yuborilayotgan bo'lim ID
     private ApplicationStatus status;       /// Ariza xolati
     private Integer completedWorkId;        /// Ariza bajarilganligi xaqida ma'lumot

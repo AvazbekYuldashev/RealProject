@@ -29,7 +29,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy c " +
             "LEFT JOIN a.assignedTo at " +
             "LEFT JOIN a.department d " +
-            "WHERE a.visible = true")
+            "WHERE a.visible = true order by a.createdDate desc")
     List<ApplicationMapper> findAllMapper();
 
 
@@ -41,7 +41,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy c " +
             "LEFT JOIN a.assignedTo at " +
             "LEFT JOIN a.department d " +
-            "where a.id = :idP and a.visible = true ")
+            "where a.id = :idP and a.visible = true order by a.createdDate desc")
     Optional<ApplicationMapper> findByIdMapper(@Param("idP") Integer id);
 
     @Query("SELECT a.id as id, a.title as title, a.description as description, a.createdDate as createdDate, a.updatedDate as updatedDate, a.offering.id as offering, a.createdBy.id as createdBy, a.assignedTo.id as assignedTo, a.department.id as department, a.status as status " +
@@ -50,7 +50,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy c " +
             "LEFT JOIN a.assignedTo at " +
             "LEFT JOIN a.department d " +
-            "WHERE c.id = :createdByIdP AND a.visible = true")
+            "WHERE c.id = :createdByIdP AND a.visible = true order by a.createdDate desc")
     List<ApplicationMapper> findByCreatedByMapper(@Param("createdByIdP") Integer createdById);
 
     @Query("SELECT a.id as id, a.title as title, a.description as description, a.createdDate as createdDate, a.updatedDate as updatedDate, a.offering.id as offering, a.createdBy.id as createdBy, a.assignedTo.id as assignedTo, a.department.id as department, a.status as status " +
@@ -59,7 +59,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy c " +
             "LEFT JOIN a.assignedTo at " +
             "LEFT JOIN a.department d " +
-            "WHERE a.assignedTo.id = :assignedToIdP AND a.visible = true")
+            "WHERE a.assignedTo.id = :assignedToIdP AND a.visible = true order by a.createdDate desc")
     List<ApplicationMapper> findByAssignedToMapper(@Param("assignedToIdP") Integer assignedToId);
 
     @Query("SELECT a.id as id, a.title as title, a.description as description, a.createdDate as createdDate, a.updatedDate as updatedDate, a.offering.id as offering, a.createdBy.id as createdBy, a.assignedTo.id as assignedTo, a.department.id as department, a.status as status " +
@@ -68,7 +68,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy c " +
             "LEFT JOIN a.assignedTo at " +
             "LEFT JOIN a.department d " +
-            "WHERE a.department.id = :departmentIdP AND a.visible = true")
+            "WHERE a.department.id = :departmentIdP AND a.visible = true order by a.createdDate desc")
     List<ApplicationMapper> findByDepartmentMapper(@Param("departmentIdP") Integer departmentId);
 
     @Query("SELECT a.id as id, a.title as title, a.description as description, a.createdDate as createdDate, a.updatedDate as updatedDate, a.offering.id as offering, a.createdBy.id as createdBy, a.assignedTo.id as assignedTo, a.department.id as department, a.status as status " +
@@ -77,7 +77,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy c " +
             "LEFT JOIN a.assignedTo at " +
             "LEFT JOIN a.department d " +
-            "WHERE a.status = :statusP AND a.visible = true")
+            "WHERE a.status = :statusP AND a.visible = true order by a.createdDate desc")
     List<ApplicationMapper> findByStatusMapper(@Param("statusP") ApplicationStatus status);
 
     @Query("SELECT a.id as id, a.title as title, a.description as description, a.createdDate as createdDate, " +
@@ -88,7 +88,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy u " +
             "LEFT JOIN a.assignedTo e " +
             "LEFT JOIN a.department d " +
-            "WHERE a.visible = true")
+            "WHERE a.visible = true order by a.createdDate desc")
     Page<ApplicationMapper> findAllPageble(Pageable pageable);
 
     @Query("SELECT a.id as id, a.title as title, a.description as description, a.createdDate as createdDate, " +
@@ -99,7 +99,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy u " +
             "LEFT JOIN a.assignedTo e " +
             "LEFT JOIN a.department d " +
-            "WHERE a.visible = true and a.createdBy.id = :idP")
+            "WHERE a.visible = true and a.createdBy.id = :idP order by a.createdDate desc")
     Page<ApplicationMapper> findCreatedByPaged(Pageable pageable, @Param("idP") Integer idP);
 
     @Modifying

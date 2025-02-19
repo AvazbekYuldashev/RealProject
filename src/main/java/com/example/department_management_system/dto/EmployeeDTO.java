@@ -3,13 +3,16 @@ package com.example.department_management_system.dto;
 
 import com.example.department_management_system.enums.EmployeeRole;
 import com.example.department_management_system.enums.EmployeeStatus;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
 ///  Xodimlar
 public class EmployeeDTO {
     private Integer id;                                                   /// Id si
+    @NotBlank(message = "Name required")
     private String name;                                                  /// Ismi
+    @NotBlank(message = "Surname required")
     private String surname;                                               /// Familyasi
     private EmployeeRole role;                                            /// Roli
     private String position;                                              /// Lavozimi
@@ -18,7 +21,9 @@ public class EmployeeDTO {
     private LocalDateTime updatedDate;                                    /// Yangilangan sanasi
     private Integer departmentId;                                         /// Bo'lim IDsi
     private Boolean visible;                                              /// korinishi
+    @NotBlank(message = "Email required")
     private String email;
+    @NotBlank(message = "Password required")
     private String password;
 
     public EmployeeDTO(){}

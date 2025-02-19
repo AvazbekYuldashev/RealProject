@@ -26,7 +26,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
             "e.updatedDate as updatedDate, e.email as email, e.password as password, " +
             "d.id as department, d.title as departmentTitle, e.visible as visible " +
             "FROM EmployeeEntity e LEFT JOIN e.department d " +
-            "WHERE e.visible = true")
+            "WHERE e.visible = true order by e.createdDate desc")
     List<EmployeeMapper> findAllMapper();
 
     @Query("SELECT e.id as id, e.name as name, e.surname as surname, e.role as role, " +
@@ -34,7 +34,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
             "e.updatedDate as updatedDate, e.department.id as department, e.email as email, " +
             "e.password as password, e.department.title as departmentTitle, e.visible as visible " +
             "FROM EmployeeEntity e LEFT JOIN e.department d " +
-            "WHERE e.id = :idP AND e.visible = true")
+            "WHERE e.id = :idP AND e.visible = true order by e.createdDate desc")
     Optional<EmployeeMapper> findByIdMapper(@Param("idP") Integer id);
 
     @Query("SELECT e.id as id, e.name as name, e.surname as surname, e.role as role, " +
@@ -42,17 +42,17 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
             "e.updatedDate as updatedDate, e.department.id as department, e.email as email, " +
             "e.password as password, e.department.title as departmentTitle, e.visible as visible " +
             "FROM EmployeeEntity e LEFT JOIN e.department d " +
-            "WHERE e.department.id = :departmentIdP and e.visible = true")
+            "WHERE e.department.id = :departmentIdP and e.visible = true order by e.createdDate desc")
     List<EmployeeMapper> findByDepartmentMapper(@Param("departmentIdP") Integer departmentId);
 
     @Query("SELECT e.id as id, e.name as name, e.surname as surname, e.role as role, e.position as position, " +
             "e.status as status, e.createdDate as createdDate, e.updatedDate as updatedDate, d.id as department, " +
             "e.email as email, e.password as password, e.visible as visible  " +
             "FROM EmployeeEntity e LEFT JOIN e.department d " +
-            "WHERE e.visible = true")
+            "WHERE e.visible = true order by e.createdDate desc")
     Page<EmployeeMapper> findAllPageble(Pageable pageable);
 
-    @Query("FROM EmployeeEntity where email = :emailP and visible = true")
+    @Query("FROM EmployeeEntity where email = :emailP and visible = true order by createdDate desc")
     Optional<EmployeeEntity> findByEmailAndVisibleTrue(@Param("emailP") String email);
 
 

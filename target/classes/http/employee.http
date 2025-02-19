@@ -22,6 +22,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
 GET http://localhost:8080/employee/12
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0NDA4MTQsImV4cCI6MTczOTUyNzIxNH0.qgodvrJiHVFSguTnF4XXiNeWHtdnJSaMzx8hZh3zrrs
 
+### Get Mee
+GET http://localhost:8080/employee/getMe
+
 ### Get Employees By Department
 GET http://localhost:8080/employee/1/department
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkxMDE2OTgsImV4cCI6MTczOTE4ODA5OH0.ax8J2oFlSGgG1Wyfa1tQnmnOh3HjLve8UJQyjitMnW8
@@ -70,9 +73,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0NDA4MTQsImV4cCI6MTczOTUyNzIxNH0.qgodvrJiHVFSguTnF4XXiNeWHtdnJSaMzx8hZh3zrrs
 
 {
-  "name": "  ",
-  "surname": "Smith",
-  "position": "Lead Engineer"
+  "name": "  asd",
+  "surname": "asd ",
+  "password": "asd"
 }
 
 ### Soft Delete Employee
@@ -83,6 +86,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
 {
   "visible": true
 }
+
+### Soft Delete Employee
+PUT http://localhost:8080/employee/wipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzg5NTMxNTAsImV4cCI6MTczOTAzOTU1MH0.nBt3NWPpHpQuwgJIPiWjKERWVrzO1j83wcTPDsaQjIY
+
 
 ### Hard Delete Employee
 DELETE http://localhost:8080/employee/2/delete

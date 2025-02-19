@@ -117,6 +117,7 @@ public class DepartmentService {
         for (DepartmentEntity entity : result){dtoResult.add(toDto(entity));}
         return new PageImpl<>(dtoResult, PageRequest.of(page, size), result.getTotalElements());
     }
+
     /// Get By id returned entity
     public DepartmentEntity getByIdEntity(Integer id) {
         Optional<DepartmentEntity> department = departmentRepository.findByIdCustom(id);

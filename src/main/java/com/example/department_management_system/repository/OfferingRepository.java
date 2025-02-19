@@ -21,17 +21,17 @@ public interface OfferingRepository extends JpaRepository<OfferingEntity, Intege
 
     @Query("SELECT o.id as id, o.status as status, o.title as title, o.description as description, " +
             "o.createdDate as createdDate, o.updatedDate as updatedDate, d.id as departmentId " +
-            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.visible = true")
+            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.visible = true order by o.createdDate desc")
     List<OfferingMapper> findAllMapper();
 
     @Query("SELECT o.id as id, o.status as status, o.title as title, o.description as description, " +
             "o.createdDate as createdDate, o.updatedDate as updatedDate, d.id as departmentId " +
-            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.id = :idP AND o.visible = true")
+            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.id = :idP AND o.visible = true order by o.createdDate desc")
     Optional<OfferingMapper> findByIdMapper(@Param("idP") Integer id);
 
     @Query("SELECT o.id as id, o.status as status, o.title as title, o.description as description, " +
             "o.createdDate as createdDate, o.updatedDate as updatedDate, d.id as departmentId " +
-            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.department.id = :idP AND o.visible = true")
+            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.department.id = :idP AND o.visible = true order by o.createdDate desc")
     List<OfferingMapper> findByDepartmentMapper(@Param("idP") Integer id);
 
 
@@ -74,12 +74,12 @@ public interface OfferingRepository extends JpaRepository<OfferingEntity, Intege
 
     @Query("SELECT o.id as id, o.status as status, o.title as title, o.description as description, o.createdDate as createdDate, " +
             "o.updatedDate as updatedDate, d.id as departmentId " +
-            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.visible = true")
+            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.visible = true order by o.createdDate desc")
     Page<OfferingMapper> findAllPageble(Pageable pageable);
 
     @Query("SELECT o.id as id, o.status as status, o.title as title, o.description as description, o.createdDate as createdDate, " +
             "o.updatedDate as updatedDate, d.id as departmentId " +
-            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.visible = true and d.id = :departmentId")
+            "FROM OfferingEntity o LEFT JOIN o.department d WHERE o.visible = true and d.id = :departmentId order by o.createdDate desc")
     Page<OfferingMapper> findAllByDepartmentIdPageble(Pageable pageable, @Param("departmentId") Integer departmentId);
 
 }

@@ -1,17 +1,23 @@
 package com.example.department_management_system.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 ///  Bo'limga kelgan takliflars
 public class SuggestionDTO {
     private Integer id;                                      /// ID
+    @NotBlank(message = "Title required")
     private String title;                                    /// Taklif nomi
+    @NotBlank(message = "Description required")
     private String description;                              /// Taklif tavsifi
     private Integer createdById;                             /// Taklifni yaratgan xodim IDsi
     private Integer assignedToId;                            /// Taklifni qabul qilgan bo'lim IDsi
     private LocalDateTime createdDate;                       /// Yaratilgan sanasi
     private LocalDateTime updatedDate;                       /// Yangilangan sanasi
     private Boolean visible;
+    @NotNull(message = "Department Id required")
     private Integer departmentId;
 
     public SuggestionDTO(){}

@@ -43,6 +43,7 @@ public class ApplicationService {
 
     ///  Create application  --> (Yangi ariza yaratish).
     public ApplicationDTO saveApplication(ApplicationDTO applicationDTO) {
+        departmentService.getByIdEntity(applicationDTO.getDepartmentId());
         applicationDTO.setCreatedById(SpringSecurityUtil.getCurrentUserId());
         applicationDTO.setCreatedDate(LocalDateTime.now());
         applicationDTO.setUpdatedDate(LocalDateTime.now());
@@ -102,7 +103,8 @@ public class ApplicationService {
         if (!(status.equals(ApplicationStatus.SENT) ||
                 status.equals(ApplicationStatus.APPROVED) ||
                 status.equals(ApplicationStatus.IN_PROGRESS) ||
-                status.equals(ApplicationStatus.COMPLETED))) {
+                status.equals(ApplicationStatus.COMPLETED) ||
+                status.equals(ApplicationStatus.REJECTED))) {
             throw new IllegalArgumentException("Invalid application status: " + status);
         }
         return applicationRepository.findByStatusMapper(status);
@@ -111,14 +113,15 @@ public class ApplicationService {
     /// Update --> (Holatni yangilash).
     public Boolean updateStatus(Integer id, ApplicationDTO applicationDTO) {
         ApplicationEntity application = getByIdEntity(id);
-        if (!application.getAssignedTo().getId().equals(SpringSecurityUtil.getCurrentUserId())){
+        if (!application.getAssignedTo().getId().equals(SpringSecurityUtil.getCurrentUserId()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())){
             throw new AppBadRequestExeption("This application cannot be modified by the user who submitted it.");
         }
         ApplicationStatus status = applicationDTO.getStatus();
         if (!(status.equals(ApplicationStatus.SENT) ||
                 status.equals(ApplicationStatus.APPROVED) ||
                 status.equals(ApplicationStatus.IN_PROGRESS) ||
-                status.equals(ApplicationStatus.COMPLETED))) {
+                status.equals(ApplicationStatus.COMPLETED) ||
+                status.equals(ApplicationStatus.REJECTED))) {
             throw new IllegalArgumentException("Invalid application status: " + status);
         }
         int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
@@ -216,7 +219,8 @@ public class ApplicationService {
         if (!(dto.getStatus().equals(ApplicationStatus.SENT) ||
                 dto.getStatus().equals(ApplicationStatus.APPROVED) ||
                 dto.getStatus().equals(ApplicationStatus.IN_PROGRESS) ||
-                dto.getStatus().equals(ApplicationStatus.COMPLETED))) {
+                dto.getStatus().equals(ApplicationStatus.COMPLETED) ||
+                dto.getStatus().equals(ApplicationStatus.REJECTED))) {
             throw new IllegalArgumentException("Invalid application status: " + dto.getStatus());
         }
         PageImpl<ApplicationEntity> result = applicationCustomRepository.filter(dto, page, size);

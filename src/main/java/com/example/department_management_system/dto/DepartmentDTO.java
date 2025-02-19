@@ -3,6 +3,7 @@ package com.example.department_management_system.dto;
 
 import com.example.department_management_system.enums.DepartmentStatus;
 import com.example.department_management_system.enums.DepartmentType;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,11 +12,15 @@ import java.util.List;
 public class DepartmentDTO {
     private Integer id;                                          /// Id
     private DepartmentStatus status;                             /// Xozirgi xolati
+    @NotBlank(message = "Title required")
     private String title;                                        /// Bo'lim nomi
+    @NotBlank(message = "Description required")
     private String description;                                  /// Bo'lim xaqida qisqacha
     private LocalDateTime createdDate;                           /// Yaratilgan sanasi
     private LocalDateTime updatedDate;                           /// Yangilangan sanasi
+    @NotBlank(message = "Address required")
     private String address;                                      /// Bo'lim manzili
+    @NotBlank(message = "Phone Number required")
     private String phoneNumber;                                  /// Bo'lim telefon raqami
     private String headOfDepartment;                             /// Bo'lim boshlig'ining ismi yoki ID-si
     private DepartmentType type;                                 /// Bo'lim turi (masalan, "Akademik", "Texnik")
