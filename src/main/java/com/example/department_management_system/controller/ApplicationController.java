@@ -99,8 +99,8 @@ public class ApplicationController {
     /// Delete for visible
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PatchMapping("/{id}/wipe")
-    public ResponseEntity<?> updateVisible(@PathVariable("id") Integer id, @RequestBody Boolean visible) {
-        Boolean isUpdate = applicationService.updateVisible(id, visible);
+    public ResponseEntity<?> updateVisible(@PathVariable("id") Integer id, @RequestBody ApplicationFilterDTO visible) {
+        Boolean isUpdate = applicationService.updateVisible(id, visible.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
     /// Delete By Id

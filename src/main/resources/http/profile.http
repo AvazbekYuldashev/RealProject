@@ -7,7 +7,7 @@ Content-Type: application/json
   "surname": "Doe",
   "role": "USER",
   "position": "Software Developer",
-  "email": "Greed@example.com",
+  "email": "GREED@example.com",
   "password": "securePassword123"
 }
 

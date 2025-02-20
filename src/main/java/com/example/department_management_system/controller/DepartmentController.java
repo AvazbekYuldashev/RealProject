@@ -58,7 +58,7 @@ public class DepartmentController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/{id}/wipe")
-    public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody DepartmentDTO departmentDTO) {
+    public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody DepartmentFilterDTO departmentDTO) {
         Boolean isUpdate = departmentService.deleteWipe(id, departmentDTO.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }

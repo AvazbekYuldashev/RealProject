@@ -1,19 +1,20 @@
 ### Bo'lim yaratish
-POST http://localhost:8080/department
+POST http://213.230.99.253:8080/department
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk2NTA2MDEsImV4cCI6MTczOTczNzAwMX0.ITJg2ktSr2n9pY9EW8X41ppcqceEqMIH5UMouCn9l6o
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDAwNjg2MzIsImV4cCI6MTc0MDE1NTAzMn0.8b1sXeUtw2hgxEDjTw01QwAgF_uAfDoZAz510cLxoYM
 
 {
   "title": "IT Department",
   "description": "Responsible for IT infrastructure",
   "phoneNumber": "+998902597890",
   "headOfDepartment": "Ali aliyev",
-  "type": "TECHNICAL"
+  "type": "TECHNICAL",
+  "address": "Andijon shaxar"
 }
 
 ### Barcha bo'limlarni olish
 GET http://213.230.99.253:8080/department/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk5NzU1ODIsImV4cCI6MTc0MDA2MTk4Mn0.0D_uPYpqpmbvsOMXZtesrLKP00R4aTSuyTyTzW5gKHk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDAwNjg2MzIsImV4cCI6MTc0MDE1NTAzMn0.8b1sXeUtw2hgxEDjTw01QwAgF_uAfDoZAz510cLxoYM
 
 ### ID bo'yicha bo'lim olish
 GET http://localhost:8080/department/1

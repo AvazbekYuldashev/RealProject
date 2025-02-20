@@ -27,7 +27,6 @@ public class DepartmentDTO {
     private List<EmployeeDTO> employeeIds;                       /// Bo'lim tarkibidagi xodimlar IDlari
     private List<OfferingDTO> offeringIds;                       /// Bo'lim tarkibidagi xizmatlar IDlari
     private List<ApplicationDTO> applicationIds;                 /// Bo'limga kelgan arizalar IDlari
-    private List<SuggestionDTO> suggestionIds;                   /// Bo'limga kelgan takliflar IDlari
     private List<CompletedWorkDTO> completedWorkIds;             /// Bo'limda bajarilgan ishlar IDlari
     private Boolean visible;
 
@@ -35,7 +34,7 @@ public class DepartmentDTO {
     public DepartmentDTO(Integer id, DepartmentStatus status, String title, String description,
                          LocalDateTime createdDate, LocalDateTime updatedDate, String address, String phoneNumber,
                          String headOfDepartment, DepartmentType type, List<EmployeeDTO> employees,
-                         List<OfferingDTO> offerings, List<ApplicationDTO> applications, List<SuggestionDTO> suggestionDTOS,
+                         List<OfferingDTO> offerings, List<ApplicationDTO> applications,
                          List<CompletedWorkDTO> completedWorks) {
         this.id = id;
         this.status = status;
@@ -158,14 +157,6 @@ public class DepartmentDTO {
 
     public void setApplicationIds(List<ApplicationDTO> applicationIds) {
         this.applicationIds = applicationIds;
-    }
-
-    public List<SuggestionDTO> getSuggestionIds() {
-        return suggestionIds;
-    }
-
-    public void setSuggestionIds(List<SuggestionDTO> suggestionIds) {
-        this.suggestionIds = suggestionIds;
     }
 
     public List<CompletedWorkDTO> getCompletedWorkIds() {

@@ -65,7 +65,7 @@ public class OfferingController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PatchMapping("/{id}/wipe")
-    public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody OfferingDTO offeringDTO) {
+    public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody OfferingFilterDTO offeringDTO) {
         Boolean isUpdate = offeringService.deleteWipe(id, offeringDTO.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }

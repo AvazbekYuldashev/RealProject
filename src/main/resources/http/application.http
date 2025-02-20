@@ -1,12 +1,12 @@
 ### Create Application
 POST http://213.230.99.253:8080/application
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInZpc2libGUiOnRydWUsInN1cm5hbWUiOiJEb2UiLCJuYW1lIjoiSm9obiIsImlkIjoyLCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiR3JlZWRAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJHcmVlZEBleGFtcGxlLmNvbSIsImlhdCI6MTczOTk4MTcyNSwiZXhwIjoxNzQwMDY4MTI1fQ.5jlCcgPuRw32K9FDvoJx8epuRTEZRP6RixEBv8mHYy4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInZpc2libGUiOnRydWUsInN1cm5hbWUiOiJEb2UiLCJuYW1lIjoiSm9obiIsImlkIjo5LCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiR1JFRURAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJHUkVFREBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDA3NDM1MSwiZXhwIjoxNzQwMTYwNzUxfQ.MW3wq_4hYw-VYFnXn5U-Mrg9cSVPzF2QFjHzgEJg7Ok
 
 {
   "title": "asdasd",
   "description": "xfesfesfe",
-  "departmentId": 1,
+  "departmentId": 2,
   "offeringId": 1
 }
 
@@ -17,10 +17,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
 ### Update Status
 PUT http://213.230.99.253:8080/application/1/status
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwiZGVwYXJ0bWVudElkIjoxLCJuYW1lIjoiSm9obiIsImlkIjoxLCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDA2NjUyMywiZXhwIjoxNzQwMTUyOTIzfQ.582XA7kRmkNx0yeCI0CDyJ8JptR_h1Yfa1On9LRFS2c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwiZGVwYXJ0bWVudElkIjoxLCJuYW1lIjoiSm9obiIsImlkIjoxLCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDA2NzY3NCwiZXhwIjoxNzQwMTU0MDc0fQ.wsTnAQ1oEZZ_Bl5k34qxwpEZ2klaFXltmL2U5SNLpqs
 
 {
-  "status": "COMPLETED"
+  "status": "REJECTED"
 }
 
 ### Get Application by ID
@@ -67,8 +67,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
 
 
 ### Update Application
-PUT http://localhost:8080/application/1
+PUT http://localhost:8080/application/4
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDAwNjg2MzIsImV4cCI6MTc0MDE1NTAzMn0.8b1sXeUtw2hgxEDjTw01QwAgF_uAfDoZAz510cLxoYM
+
 
 {
   "name": "Updated Application",

@@ -41,8 +41,6 @@ public class DepartmentEntity {
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<ApplicationEntity> applications;                         /// Bo'limga kelgan arizalar
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    private List<SuggestionEntity> suggestions;                           /// Bo'limga kelgan takliflar
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<CompletedWorkEntity> completedWorks;                     /// Bo'limda bajarilgan ishalar
     @Column(name = "visible", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean visible = true;                                       /// korinishi
@@ -147,14 +145,6 @@ public class DepartmentEntity {
 
     public void setApplications(List<ApplicationEntity> applications) {
         this.applications = applications;
-    }
-
-    public List<SuggestionEntity> getSuggestions() {
-        return suggestions;
-    }
-
-    public void setSuggestions(List<SuggestionEntity> suggestions) {
-        this.suggestions = suggestions;
     }
 
     public List<CompletedWorkEntity> getCompletedWorks() {

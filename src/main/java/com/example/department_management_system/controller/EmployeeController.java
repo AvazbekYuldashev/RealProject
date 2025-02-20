@@ -103,7 +103,7 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}/wipe")
-    public ResponseEntity<?> deleteWipeA(@PathVariable("id") Integer id, @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> deleteWipeA(@PathVariable("id") Integer id, @RequestBody EmployeeFilterDTO employeeDTO) {
         Boolean isUpdate = employeeService.deleteWipeA(id, employeeDTO.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }

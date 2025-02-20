@@ -6,7 +6,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
 {
   "name": "John",
   "surname": "Doe",
-  "role": "USER",
+  "role": "ADMIN",
   "position": "Software Engineer",
   "status": "ACTIVE",
   "email": "lweifjliwejf@example.com",

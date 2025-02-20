@@ -25,13 +25,12 @@ public class DepartmentFilterDTO {
     private List<EmployeeDTO> employeeIds;                  /// Bo'lim tarkibidagi xodimlar IDlari
     private List<OfferingDTO> offeringIds;                  /// Bo'lim tarkibidagi xizmatlar IDlari
     private List<ApplicationDTO> applicationIds;            /// Bo'limga kelgan arizalar IDlari
-    private List<SuggestionDTO> suggestionIds;              /// Bo'limga kelgan takliflar IDlari
     private List<CompletedWorkDTO> completedWorkIds;        /// Bo'limda bajarilgan ishlar IDlari
     private Boolean visible;
 
     public DepartmentFilterDTO(){}
 
-    public DepartmentFilterDTO(Integer id, DepartmentStatus status, String title, String description, LocalDate createdDateFrom, LocalDate createdDateTo, LocalDate updatedDateFrom, LocalDate updatedDateTo, String address, String phoneNumber, String headOfDepartment, DepartmentType type, List<EmployeeDTO> employeeIds, List<OfferingDTO> offeringIds, List<ApplicationDTO> applicationIds, List<SuggestionDTO> suggestionIds, List<CompletedWorkDTO> completedWorkIds, Boolean visible) {
+    public DepartmentFilterDTO(Integer id, DepartmentStatus status, String title, String description, LocalDate createdDateFrom, LocalDate createdDateTo, LocalDate updatedDateFrom, LocalDate updatedDateTo, String address, String phoneNumber, String headOfDepartment, DepartmentType type, List<EmployeeDTO> employeeIds, List<OfferingDTO> offeringIds, List<ApplicationDTO> applicationIds,  List<CompletedWorkDTO> completedWorkIds, Boolean visible) {
         this.id = id;
         this.status = status;
         this.title = title;
@@ -47,7 +46,6 @@ public class DepartmentFilterDTO {
         this.employeeIds = employeeIds;
         this.offeringIds = offeringIds;
         this.applicationIds = applicationIds;
-        this.suggestionIds = suggestionIds;
         this.completedWorkIds = completedWorkIds;
         this.visible = visible;
     }
@@ -170,14 +168,6 @@ public class DepartmentFilterDTO {
 
     public void setApplicationIds(List<ApplicationDTO> applicationIds) {
         this.applicationIds = applicationIds;
-    }
-
-    public List<SuggestionDTO> getSuggestionIds() {
-        return suggestionIds;
-    }
-
-    public void setSuggestionIds(List<SuggestionDTO> suggestionIds) {
-        this.suggestionIds = suggestionIds;
     }
 
     public List<CompletedWorkDTO> getCompletedWorkIds() {

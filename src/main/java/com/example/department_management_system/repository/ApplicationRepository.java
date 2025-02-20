@@ -114,8 +114,15 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
 
     @Modifying
     @Transactional
-    @Query("UPDATE ApplicationEntity set completedWork.id = :completedWorkIdP, title = :titleP, description = :descriptionP where id = :idP and visible = true ")
-    int updateTitleAndDescription(@Param("completedWorkIdP") Integer id, @Param("titleP") String title, @Param("descriptionP") String description, @Param("updatedDateP") LocalDateTime updatedDateP);
+    @Query("UPDATE ApplicationEntity a " +
+            "SET a.title = COALESCE(:titleP, a.title)," +
+            "    a.description = COALESCE(:descriptionP, a.description), " +
+            "    a.updatedDate = :updatedDateP " +
+            " where a.id = :idP and a.visible = true ")
+    int updateTitleAndDescription(@Param("idP") Integer id,
+                                  @Param("titleP") String title,
+                                  @Param("descriptionP") String description,
+                                  @Param("updatedDateP") LocalDateTime updatedDateP);
 
     @Modifying
     @Transactional
