@@ -172,6 +172,9 @@ public class EmployeeService {
 
     @Transactional
     public Boolean deleteWipe() {
+        if (SpringSecurityUtil.getCurrentUserId().equals(1)){
+            throw new AppBadRequestExeption("This User Uniq Admin");
+        }
         int effectedRow = employeeRepository.updateVisible(SpringSecurityUtil.getCurrentUserId(), false, LocalDateTime.now());
         return effectedRow > 0;
     }
@@ -180,7 +183,7 @@ public class EmployeeService {
     public Boolean deleteById(Integer id) {
         checkAdminAccess();
         EmployeeEntity employee = getByIdEntity(id);
-        if (employee != null) {
+        if (employee != null && id != 1) {
             employeeRepository.deleteById(id);
             return true;
         }

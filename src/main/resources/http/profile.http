@@ -1,5 +1,5 @@
 ### Registration API Test
-POST http://localhost:8080/profile/registration
+POST http://213.230.99.253:8080/profile/registration
 Content-Type: application/json
 
 {
@@ -12,11 +12,11 @@ Content-Type: application/json
 }
 
 ### Authorization API Test
-POST http://localhost:8080/profile/authorization
+POST http://213.230.99.253:8080/profile/authorization
 Content-Type: application/json
 
 {
-  "email": "Greed@example.com",
+  "email": "john.doe@example.com",
   "password": "securePassword123"
 }
 

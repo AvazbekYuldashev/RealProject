@@ -91,7 +91,7 @@ public class ApplicationService {
     }
 
     /// Update AssingedTo --> (Bajargan xodimni yangilash).
-    public Boolean updateAssignedTo(Integer id, ApplicationDTO applicationDTO) {
+    public Boolean  updateAssignedTo(Integer id, ApplicationDTO applicationDTO) {
         checkAdminAccess();
         int effectedRow = applicationRepository.updateAssignedTo(id, applicationDTO.getAssignedToId(), ApplicationStatus.APPROVED, LocalDateTime.now());
         return effectedRow > 0;
@@ -111,9 +111,27 @@ public class ApplicationService {
     }
 
     /// Update --> (Holatni yangilash).
+    public Boolean updateStatusReject(Integer id, ApplicationDTO applicationDTO) {
+        ApplicationEntity application = getByIdEntity(id);
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())){
+            throw new AppBadRequestExeption("This application cannot be modified by the user who submitted it.");
+        }
+        ApplicationStatus status = applicationDTO.getStatus();
+        if (!(status.equals(ApplicationStatus.SENT) ||
+                status.equals(ApplicationStatus.APPROVED) ||
+                status.equals(ApplicationStatus.IN_PROGRESS) ||
+                status.equals(ApplicationStatus.COMPLETED) ||
+                status.equals(ApplicationStatus.REJECTED))) {
+            throw new IllegalArgumentException("Invalid application status: " + status);
+        }
+        int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
+        return effectedRow > 0;
+    }
+
+    /// Update --> (Holatni yangilash).
     public Boolean updateStatus(Integer id, ApplicationDTO applicationDTO) {
         ApplicationEntity application = getByIdEntity(id);
-        if (!application.getAssignedTo().getId().equals(SpringSecurityUtil.getCurrentUserId()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())){
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())){
             throw new AppBadRequestExeption("This application cannot be modified by the user who submitted it.");
         }
         ApplicationStatus status = applicationDTO.getStatus();

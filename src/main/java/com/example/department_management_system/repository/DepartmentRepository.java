@@ -21,6 +21,7 @@ import java.util.Optional;
 @Repository
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Integer> {
 
+
     DepartmentEntity save(DepartmentEntity entity);
 
     @Query("SELECT d.id as id, d.status as status, d.title as title, d.description as description, d.createdDate as createdDate, d.updatedDate as updatedDate, d.address as address, d.phoneNumber as phoneNumber, d.headOfDepartment as headOfDepartment, d.type as type FROM DepartmentEntity d where d.visible = true order by d.createdDate desc")
@@ -34,7 +35,6 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
 
     @Query("FROM DepartmentEntity WHERE id = :idP order by createdDate desc")
     Optional<DepartmentEntity> findByIdCustom(@Param("idP") Integer id);
-
 
     @Modifying
     @Transactional

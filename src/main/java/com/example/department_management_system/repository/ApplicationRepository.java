@@ -99,7 +99,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             "LEFT JOIN a.createdBy u " +
             "LEFT JOIN a.assignedTo e " +
             "LEFT JOIN a.department d " +
-            "WHERE a.visible = true and a.createdBy.id = :idP order by a.createdDate desc")
+            "WHERE a.visible = true and a.createdBy.id = :idP order by a.createdDate desc  ")
     Page<ApplicationMapper> findCreatedByPaged(Pageable pageable, @Param("idP") Integer idP);
 
     @Modifying

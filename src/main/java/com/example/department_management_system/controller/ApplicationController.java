@@ -87,6 +87,8 @@ public class ApplicationController {
         Boolean isUpdate = applicationService.updateStatus(id, applicationDTO);
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
+
+
     /// Update application
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/{id}")
