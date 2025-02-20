@@ -5,9 +5,9 @@ Content-Type: application/json
 {
   "name": "John",
   "surname": "Doe",
-  "role": "USER",
+  "role": "ADMIN",
   "position": "Software Developer",
-  "email": "GREED@example.com",
+  "email": "john.doe@example.com",
   "password": "securePassword123"
 }
 

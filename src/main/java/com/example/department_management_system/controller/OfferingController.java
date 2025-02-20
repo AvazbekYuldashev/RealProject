@@ -97,8 +97,9 @@ public class OfferingController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/pageds")
     public ResponseEntity<PageImpl<OfferingMapper>> getByDepartmentId(@RequestParam("page") int page,
-                                                               @RequestParam("size") int size) {
-        PageImpl<OfferingMapper> offeringDTOS = offeringService.pagination(getCurrentPage(page), size);
+                                                               @RequestParam("size") int size,
+                                                                      @RequestBody OfferingFilterDTO offeringFilterDTO) {
+        PageImpl<OfferingMapper> offeringDTOS = offeringService.paginationByDepartmentId(getCurrentPage(page), size, offeringFilterDTO.getDepartmentId());
         return new ResponseEntity<>(offeringDTOS, HttpStatus.OK);
     }
 

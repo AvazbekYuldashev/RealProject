@@ -106,7 +106,7 @@ public class OfferingService {
         return new PageImpl<OfferingMapper>(pageObj.getContent(), pageable, total);
     }
 
-    public PageImpl<OfferingMapper> getByDepartmentId(int page, int size, Integer departmentId) {
+    public PageImpl<OfferingMapper> paginationByDepartmentId(int page, int size, Integer departmentId) {
         Sort sort = Sort.by("createdDate").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
         Page<OfferingMapper> pageObj = offeringRepository.findAllByDepartmentIdPageble(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()), departmentId);
