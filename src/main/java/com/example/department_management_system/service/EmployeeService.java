@@ -6,6 +6,7 @@ import com.example.department_management_system.dto.EmployeeUpdateDTO;
 import com.example.department_management_system.entity.DepartmentEntity;
 import com.example.department_management_system.entity.EmployeeEntity;
 import com.example.department_management_system.enums.EmployeeRole;
+import com.example.department_management_system.enums.EmployeeStatus;
 import com.example.department_management_system.exp.AppBadRequestExeption;
 import com.example.department_management_system.mapper.EmployeeMapper;
 import com.example.department_management_system.repository.DepartmentRepository;
@@ -47,20 +48,28 @@ public class EmployeeService {
 
     ///  Create Employee
     @Transactional
-    public EmployeeDTO create(EmployeeDTO employeeDTO) {
+    public EmployeeDTO create(EmployeeDTO dto) {
         checkAdminAccess();
-        emailValidC(employeeDTO.getEmail());
-
-        if (employeeDTO.getPassword() == null) {
-            throw new AppBadRequestExeption("Password is required");
-        }
-        employeeDTO.setPassword(bc.encode(employeeDTO.getPassword()));
-        employeeDTO.setCreatedDate(LocalDateTime.now());
-        employeeDTO.setUpdatedDate(LocalDateTime.now());
-        employeeDTO.setVisible(true);
-        EmployeeEntity savedEntity = employeeRepository.save(toEntity(employeeDTO));
-        savedEntity.setPassword("00");
-        return toDto(savedEntity);
+        emailValidC(dto.getEmail());
+        EmployeeEntity entity = new EmployeeEntity();
+        entity.setName(dto.getName());
+        entity.setSurname(dto.getSurname());
+        entity.setRole(dto.getRole());
+        entity.setPosition(dto.getPosition());
+        entity.setStatus(EmployeeStatus.ACTIVE);
+        entity.setCreatedDate(LocalDateTime.now());
+        entity.setUpdatedDate(LocalDateTime.now());
+        entity.setVisible(true);
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(bc.encode(dto.getPassword()));
+        employeeRepository.save(entity);
+        dto.setId(entity.getId());
+        dto.setCreatedDate(entity.getCreatedDate());
+        dto.setUpdatedDate(entity.getUpdatedDate());
+        dto.setStatus(entity.getStatus());
+        dto.setVisible(entity.getVisible());
+        dto.setPassword("");
+        return dto;
     }
     ///  Get All Employee
     public List<EmployeeMapper> getAll() {

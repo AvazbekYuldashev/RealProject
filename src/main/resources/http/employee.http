@@ -1,7 +1,7 @@
 ### Create Employee
 POST http://localhost:8080/employee
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mzk0NDA4MTQsImV4cCI6MTczOTUyNzIxNH0.qgodvrJiHVFSguTnF4XXiNeWHtdnJSaMzx8hZh3zrrs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwiZGVwYXJ0bWVudElkIjoxLCJuYW1lIjoiSm9obiIsImlkIjoxLCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDA4MzE2MiwiZXhwIjoxNzQwMTY5NTYyfQ.IA4gWUfgZgKM6dn4ohswn9AYdOKfIOPfBz8gpR1WpJc
 
 {
   "name": "John",
@@ -9,14 +9,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
   "role": "ADMIN",
   "position": "Software Engineer",
   "status": "ACTIVE",
-  "email": "lweifjliwejf@example.com",
+  "email": "asdda@example.com",
   "password": "securePassword",
   "departmentId": 1
 }
 
 ### Get All Employees
-GET http://213.230.99.253:8080/employee/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwiZGVwYXJ0bWVudElkIjoxLCJuYW1lIjoiSm9obiIsImlkIjoxLCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDA2NjUyMywiZXhwIjoxNzQwMTUyOTIzfQ.582XA7kRmkNx0yeCI0CDyJ8JptR_h1Yfa1On9LRFS2c
+GET http://localhost:8080/employee/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwiZGVwYXJ0bWVudElkIjoxLCJuYW1lIjoiSm9obiIsImlkIjoxLCJwb3NpdGlvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDA4MzE2MiwiZXhwIjoxNzQwMTY5NTYyfQ.IA4gWUfgZgKM6dn4ohswn9AYdOKfIOPfBz8gpR1WpJc
 
 ### Get Employee By ID
 GET http://localhost:8080/employee/12

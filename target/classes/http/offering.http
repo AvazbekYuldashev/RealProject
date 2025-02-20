@@ -1,12 +1,12 @@
 ### Xizmat yaratish
 POST http://213.230.99.253:8080/offering
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDAwNjg2MzIsImV4cCI6MTc0MDE1NTAzMn0.8b1sXeUtw2hgxEDjTw01QwAgF_uAfDoZAz510cLxoYM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDAwNzU1NjUsImV4cCI6MTc0MDE2MTk2NX0.brc1ABSeMbFZhVw6N3n9LaJTMOOtNKkJqZ2ScfeUccE
 
 {
   "title": "Sample Service",
   "description": "This is a sample offering",
-  "departmentId": 2
+  "departmentId": 1
 }
 
 ### Barcha xizmatlarni olish
@@ -57,6 +57,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
 ### Xizmatlarni sahifalab olish
 GET http://localhost:8080/offering/paged?page=1&size=10
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkwMDQ3MjgsImV4cCI6MTczOTA5MTEyOH0.V-NL0olQN6hNuBqOMu-p8-ym0UdCx4X3Cq1g7zlu1AM
+
+### Xizmatlarni sahifalab olish
+GET http://localhost:8080/offering/pageds?page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzkwMDQ3MjgsImV4cCI6MTczOTA5MTEyOH0.V-NL0olQN6hNuBqOMu-p8-ym0UdCx4X3Cq1g7zlu1AM
+
 
 ### Filtr bo'yicha xizmatlarni olish
 POST http://localhost:8080/offering/filter?page=1&size=10

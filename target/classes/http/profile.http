@@ -5,19 +5,19 @@ Content-Type: application/json
 {
   "name": "John",
   "surname": "Doe",
-  "role": "USER",
+  "role": "ADMIN",
   "position": "Software Developer",
-  "email": "GREED@example.com",
+  "email": "asdasd@example.com",
   "password": "securePassword123"
 }
 
 ### Authorization API Test
-POST http://213.230.99.253:8080/profile/authorization
+POST http://localhost:8080/profile/authorization
 Content-Type: application/json
 
 {
-  "email": "GREED@example.com",
-  "password": "securePassword123"
+  "email": "asdd@example.com",
+  "password": "securePassword"
 }
 
 ### Authorization API Test

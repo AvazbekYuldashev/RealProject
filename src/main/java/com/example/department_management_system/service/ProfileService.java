@@ -69,6 +69,7 @@ public class ProfileService {
             }
             throw new AppBadRequestExeption("Phone or password wrong");
         } catch (BadCredentialsException e) {
+            e.printStackTrace();
             throw new AppBadRequestExeption("Phone or password wrong");
         }
     }

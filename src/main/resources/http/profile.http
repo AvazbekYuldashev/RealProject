@@ -7,17 +7,17 @@ Content-Type: application/json
   "surname": "Doe",
   "role": "ADMIN",
   "position": "Software Developer",
-  "email": "john.doe@example.com",
+  "email": "asdasd@example.com",
   "password": "securePassword123"
 }
 
 ### Authorization API Test
-POST http://213.230.99.253:8080/profile/authorization
+POST http://localhost:8080/profile/authorization
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
-  "password": "securePassword123"
+  "email": "asdd@example.com",
+  "password": "securePassword"
 }
 
 ### Authorization API Test
