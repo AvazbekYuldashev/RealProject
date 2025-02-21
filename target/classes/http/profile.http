@@ -16,8 +16,8 @@ POST http://localhost:8080/profile/authorization
 Content-Type: application/json
 
 {
-  "email": "asdd@example.com",
-  "password": "securePassword"
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
 }
 
 ### Authorization API Test

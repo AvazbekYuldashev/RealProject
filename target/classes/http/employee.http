@@ -9,7 +9,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0c
   "role": "ADMIN",
   "position": "Software Engineer",
   "status": "ACTIVE",
-  "email": "asdd@example.com",
+  "email": "asdda@example.com",
   "password": "securePassword",
   "departmentId": 1
 }
