@@ -44,7 +44,6 @@ public class DepartmentService {
     }
     /// Get All
     public List<DepartmentMapper> getAll() {
-        checkAdminAccess();
         return departmentRepository.findAllsMapper();
     }
     /// Get By Id
