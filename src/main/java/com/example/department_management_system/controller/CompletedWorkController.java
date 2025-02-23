@@ -20,14 +20,6 @@ import java.util.List;
 public class CompletedWorkController {
     @Autowired
     private CompletedWorkService completedWorkService;
-
-    /// Create
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("")
-    public ResponseEntity<CompletedWorkDTO> createCompletedWork(@RequestBody CompletedWorkDTO completedWorkDTO) {
-        CompletedWorkDTO savedCompletedWork = completedWorkService.saveCompletedWork(completedWorkDTO);
-        return new ResponseEntity<>(savedCompletedWork, HttpStatus.CREATED);
-    }
     ///  Get all
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
@@ -66,32 +58,11 @@ public class CompletedWorkController {
         List<CompletedWorkMapper> completedWorkDTO = completedWorkService.findByEmployeeId(id);
         return new ResponseEntity<>(completedWorkDTO, HttpStatus.OK);
     }
-    /// Update Complated Employee Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/{id}/employee")
-    public ResponseEntity<?> updateEmployee(@PathVariable("id") Integer id, @RequestBody CompletedWorkDTO completedWorkDTO) {
-        Boolean isUpdate = completedWorkService.updateEmployee(id, completedWorkDTO);
-        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
-    }
-    /// Update Complated Work
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateCompletedWork(@PathVariable("id") Integer id, @RequestBody CompletedWorkDTO completedWorkDTO) {
-        Boolean isUpdate = completedWorkService.updateCompletedWork(id, completedWorkDTO);
-        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
-    }
     ///  Delete by Id for visible
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/{id}/wipe")
     public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody CompletedWorkDTO completedWorkDTO) {
         Boolean isUpdate = completedWorkService.deleteWipe(id, completedWorkDTO.getVisible());
-        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
-    }
-    ///  Delete by Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> updateVisible(@PathVariable("id") Integer id) {
-        Boolean isUpdate = completedWorkService.deleteById(id);
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
     ///  Pagination

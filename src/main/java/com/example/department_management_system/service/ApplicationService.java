@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class ApplicationService {
 
     ///  Create application  --> (Yangi ariza yaratish).
     public ApplicationDTO saveApplication(ApplicationDTO applicationDTO) {
-        departmentService.getByIdEntity(applicationDTO.getDepartmentId());
+        departmentService.getByIdEntity(1);
         applicationDTO.setCreatedById(SpringSecurityUtil.getCurrentUserId());
         applicationDTO.setCreatedDate(LocalDateTime.now());
         applicationDTO.setUpdatedDate(LocalDateTime.now());
@@ -52,115 +51,39 @@ public class ApplicationService {
         ApplicationEntity applicationEntity = toEntity(applicationDTO);
         return toDTO(applicationRepository.save(applicationEntity));
     }
-
     /// Get All --> (Barcha arizalarni olish)
     public List<ApplicationMapper> getAll() {
         checkAdminAccess();
         return applicationRepository.findAllMapper();
     }
-
     ///  Get by Id  --> (ID bo‘yicha ApplicationMapperni qaytarish).
     public ApplicationMapper getById(Integer id) {
         checkAdminAccess();
         Optional<ApplicationMapper> applicationMapper = applicationRepository.findByIdMapper(id);
-        if (applicationMapper.isEmpty()) {
-            return null;
-        }
+        if (applicationMapper.isEmpty()) {return null;}
         return applicationMapper.get();
     }
-
     /// Get By CreatedBy --> (Arizani yuborgan xodim bo‘yicha qidirish).
     public List<ApplicationMapper> findByCreatedBy() {
         return applicationRepository.findByCreatedByMapper(SpringSecurityUtil.getCurrentUserId());
-
     }
-
     /// Get By AssingedTo --> (Arizani bajargan xodim bo‘yicha qidirish).
     public List<ApplicationMapper> findByAssignedTo() {
         checkAdminAccess();
         return applicationRepository.findByAssignedToMapper(SpringSecurityUtil.getCurrentUserId());
     }
-
     /// Get By Department -->  (Ariza yuborilgan bo‘lim bo‘yicha qidirish).
     public List<ApplicationMapper> findByDepartmentId(Integer id) {
         Integer currentDepartmentId = SpringSecurityUtil.getCurrentDepartmentId();
-        if (currentDepartmentId != null && currentDepartmentId.equals(id)) {
-            checkAdminAccess();
-        }
+        if (currentDepartmentId != null && currentDepartmentId.equals(id)) {checkAdminAccess();}
         return applicationRepository.findByDepartmentMapper(id);
     }
-
-    /// Update AssingedTo --> (Bajargan xodimni yangilash).
-    public Boolean  updateAssignedTo(Integer id, ApplicationDTO applicationDTO) {
-        checkAdminAccess();
-        int effectedRow = applicationRepository.updateAssignedTo(id, applicationDTO.getAssignedToId(), ApplicationStatus.APPROVED, LocalDateTime.now());
-        return effectedRow > 0;
-    }
-
     ///  Get By Status --> (Ariza holati bo‘yicha qidirish).
     public List<ApplicationMapper> findByStatus(ApplicationStatus status){
         checkAdminAccess();
-        if (!(status.equals(ApplicationStatus.SENT) ||
-                status.equals(ApplicationStatus.APPROVED) ||
-                status.equals(ApplicationStatus.IN_PROGRESS) ||
-                status.equals(ApplicationStatus.COMPLETED) ||
-                status.equals(ApplicationStatus.REJECTED))) {
-            throw new IllegalArgumentException("Invalid application status: " + status);
-        }
+        chekStatus(status);
         return applicationRepository.findByStatusMapper(status);
     }
-
-    /// Update --> (Holatni yangilash).
-    public Boolean updateStatusReject(Integer id, ApplicationDTO applicationDTO) {
-        ApplicationEntity application = getByIdEntity(id);
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())){
-            throw new AppBadRequestExeption("This application cannot be modified by the user who submitted it.");
-        }
-        ApplicationStatus status = applicationDTO.getStatus();
-        if (!(status.equals(ApplicationStatus.SENT) ||
-                status.equals(ApplicationStatus.APPROVED) ||
-                status.equals(ApplicationStatus.IN_PROGRESS) ||
-                status.equals(ApplicationStatus.COMPLETED) ||
-                status.equals(ApplicationStatus.REJECTED))) {
-            throw new IllegalArgumentException("Invalid application status: " + status);
-        }
-        int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
-        return effectedRow > 0;
-    }
-
-    /// Update --> (Holatni yangilash).
-    public Boolean updateStatus(Integer id, ApplicationDTO applicationDTO) {
-        ApplicationEntity application = getByIdEntity(id);
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())){
-            throw new AppBadRequestExeption("This application cannot be modified by the user who submitted it.");
-        }
-        ApplicationStatus status = applicationDTO.getStatus();
-        if (!(status.equals(ApplicationStatus.SENT) ||
-                status.equals(ApplicationStatus.APPROVED) ||
-                status.equals(ApplicationStatus.IN_PROGRESS) ||
-                status.equals(ApplicationStatus.COMPLETED) ||
-                status.equals(ApplicationStatus.REJECTED))) {
-            throw new IllegalArgumentException("Invalid application status: " + status);
-        }
-        int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
-        return effectedRow > 0;
-    }
-
-    /// Update Application --> (To‘liq arizani yangilash).
-    public Boolean updateApplication(Integer id, ApplicationDTO applicationDTO) {
-        ApplicationEntity application = getByIdEntity(id);
-        if (application.getCreatedBy().getId().equals(SpringSecurityUtil.getCurrentUserId()) && application.getStatus() != ApplicationStatus.SENT){
-            int effectedRow =  applicationRepository.updateTitleAndDescription(id, applicationDTO.getTitle(), applicationDTO.getDescription(), LocalDateTime.now());
-            return effectedRow > 0;
-        } else {
-            checkAdminAccess();
-            int effectedRow = applicationRepository.updateApplication(id, applicationDTO.getTitle(), applicationDTO.getDescription(),
-                    applicationDTO.getOfferingId(), applicationDTO.getCreatedById(), applicationDTO.getAssignedToId(),
-                    applicationDTO.getDepartmentId(), applicationDTO.getStatus(), applicationDTO.getCompletedWorkId(), LocalDateTime.now());
-            return effectedRow > 0;
-        }
-    }
-
     /// Update Visible --> (Ko‘rinish holatini (visible) yangilash.)
     public Boolean updateVisible(Integer id, Boolean visible) {
         ApplicationEntity application = getByIdEntity(id);
@@ -170,14 +93,64 @@ public class ApplicationService {
         }
         throw new AppBadRequestExeption("It does not belong to the current profile.");
     }
-
-    /// Delete By Id --> (ID bo‘yicha arizani o‘chirish.)
-    public Boolean deleteById(Integer id) {
+    /// Get Paged  --> (Saxifalab korish.)
+    public PageImpl<ApplicationMapper> pagination(int page, int size){
         checkAdminAccess();
-        ApplicationEntity application = getByIdEntity(id);
-        applicationRepository.deleteById(id);
-        return true;
+        Sort sort = Sort.by("createdDate").descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<ApplicationMapper> pageObj = applicationRepository.findAllPageble(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
+        long total = pageObj.getTotalElements();
+        return new PageImpl<ApplicationMapper>(pageObj.getContent(), pageable, total);
     }
+    /// Get By filter  --> (Filter boyicha malumot olish)
+    public PageImpl<ApplicationDTO> filter(ApplicationFilterDTO dto, int page, int size) {
+        chekStatus(dto.getStatus());
+        PageImpl<ApplicationEntity> result = applicationCustomRepository.filter(dto, page, size);
+        List<ApplicationDTO> dtoResult = new LinkedList<>();
+        for (ApplicationEntity entity : result){
+            System.out.println(entity.toString());
+            dtoResult.add(toDTO(entity));}
+        return new PageImpl<>(dtoResult, PageRequest.of(page, size), result.getTotalElements());
+    }
+    ///  Get Paged Created By  --> (Yaratgan odamni arizalarini paged korish)
+    public PageImpl<ApplicationMapper> getCreatedByPaged(int page, int size){
+        Integer id = SpringSecurityUtil.getCurrentUserId();
+        Sort sort = Sort.by("createdDate").descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<ApplicationMapper> pageObj = applicationRepository.findCreatedByPaged(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()), id);
+        long total = pageObj.getTotalElements();
+        return new PageImpl<ApplicationMapper>(pageObj.getContent(), pageable, total);
+    }
+    /// Update AssingedTo --> (Bajargan xodimni yangilash).
+    public Boolean  updateAssignedTo(Integer id, ApplicationDTO applicationDTO) {
+        checkAdminAccess();
+        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())){
+            int effectedRow = applicationRepository.updateAssignedTo(id, applicationDTO.getAssignedToId(), ApplicationStatus.APPROVED, LocalDateTime.now());
+            return effectedRow > 0;
+        }else {throw new AppBadRequestExeption("This User this application cannot be modified.");}
+    }
+    /// Update --> (Holatni yangilash).
+    public Boolean updateStatusReject(Integer id, ApplicationDTO applicationDTO) {
+        ApplicationEntity application = getByIdEntity(id);
+        if (application.getStatus() != null) {chekStatus(applicationDTO.getStatus());}
+        if (application.getStatus().equals(ApplicationStatus.REJECTED.toString())) {
+            int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
+            return effectedRow > 0;}
+        throw new AppBadRequestExeption("Please indicate the status of the application. The application can be in progress and completed.");
+    }
+    /// Update --> (Holatni yangilash).
+    public Boolean updateStatus(Integer id, ApplicationDTO applicationDTO) {
+        ApplicationEntity application = getByIdEntity(id);
+        if (application.getStatus() != null) {chekStatus(applicationDTO.getStatus());}
+        if (application.getStatus().equals(ApplicationStatus.IN_PROGRESS.toString()) || application.getStatus().equals(ApplicationStatus.COMPLETED.toString())) {
+            int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
+            if (application.getStatus().equals(ApplicationStatus.COMPLETED.toString())) {
+                completedWorkService.saveCompletedWork(application.getId());
+            }
+            return effectedRow > 0;}
+        throw new AppBadRequestExeption("Please indicate the status of the application. The application can be in progress and completed.");
+    }
+
 
     ///  ToDTO --> (Entity'ni DTO'ga o‘tkazish).
     public ApplicationDTO toDTO(ApplicationEntity entity) {
@@ -197,7 +170,6 @@ public class ApplicationService {
         if (entity.getCompletedWork() != null) {dto.setCompletedWorkId(entity.getCompletedWork().getId());}
         return dto;
     }
-
     ///  ToEntity --> (DTO'ni Entity'ga o‘tkazish).
     public ApplicationEntity toEntity(ApplicationDTO dto) {
         if (dto == null) {return null;}
@@ -216,51 +188,27 @@ public class ApplicationService {
         if (dto.getCompletedWorkId() != null) {entity.setCompletedWork(completedWorkService.getByIdEntity(dto.getCompletedWorkId()));}
         return entity;
     }
-
     ///  Get by Id Entity --> (ID bo‘yicha ApplicationEntityni qaytarish)
     public ApplicationEntity getByIdEntity(Integer id){
         Optional<ApplicationEntity> applicationEntity = applicationRepository.findById(id);
         if (applicationEntity.isEmpty()) {throw new AppBadRequestExeption("Application does not exist.");}
         return applicationEntity.get();
     }
-
-    public PageImpl<ApplicationMapper> pagination(int page, int size){
-        checkAdminAccess();
-        Sort sort = Sort.by("createdDate").descending();
-        Pageable pageable = PageRequest.of(page, size, sort);
-        Page<ApplicationMapper> pageObj = applicationRepository.findAllPageble(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
-        long total = pageObj.getTotalElements();
-        return new PageImpl<ApplicationMapper>(pageObj.getContent(), pageable, total);
-    }
-
-    public PageImpl<ApplicationDTO> filter(ApplicationFilterDTO dto, int page, int size) {
-        if (!(dto.getStatus().equals(ApplicationStatus.SENT) ||
-                dto.getStatus().equals(ApplicationStatus.APPROVED) ||
-                dto.getStatus().equals(ApplicationStatus.IN_PROGRESS) ||
-                dto.getStatus().equals(ApplicationStatus.COMPLETED) ||
-                dto.getStatus().equals(ApplicationStatus.REJECTED))) {
-            throw new IllegalArgumentException("Invalid application status: " + dto.getStatus());
-        }
-        PageImpl<ApplicationEntity> result = applicationCustomRepository.filter(dto, page, size);
-        List<ApplicationDTO> dtoResult = new LinkedList<>();
-        for (ApplicationEntity entity : result){
-            System.out.println(entity.toString());
-            dtoResult.add(toDTO(entity));}
-        return new PageImpl<>(dtoResult, PageRequest.of(page, size), result.getTotalElements());
-    }
-
     private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())) {
-            throw new AppBadRequestExeption("It does not belong to the current profile.");
-        }
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
+            throw new AppBadRequestExeption("It does not belong to the current profile.");}
     }
-
-    public PageImpl<ApplicationMapper> getCreatedByPaged(int page, int size){
-        Integer id = SpringSecurityUtil.getCurrentUserId();
-        Sort sort = Sort.by("createdDate").descending();
-        Pageable pageable = PageRequest.of(page, size, sort);
-        Page<ApplicationMapper> pageObj = applicationRepository.findCreatedByPaged(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()), id);
-        long total = pageObj.getTotalElements();
-        return new PageImpl<ApplicationMapper>(pageObj.getContent(), pageable, total);
+    private void chekStatus(ApplicationStatus status){
+        if (!(status.equals(ApplicationStatus.SENT) ||
+                status.equals(ApplicationStatus.APPROVED) ||
+                status.equals(ApplicationStatus.IN_PROGRESS) ||
+                status.equals(ApplicationStatus.COMPLETED) ||
+                status.equals(ApplicationStatus.REJECTED))) {
+            throw new IllegalArgumentException("Invalid application status: " + status);}
+    }
+    private Boolean adminAccess() {
+        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {return true;}
+        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())) {return false;}
+        throw new AppBadRequestExeption("It does not belong to the current profile.");
     }
 }

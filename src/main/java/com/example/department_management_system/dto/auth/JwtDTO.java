@@ -1,10 +1,5 @@
 package com.example.department_management_system.dto.auth;
 
-import com.example.department_management_system.enums.EmployeeRole;
-import com.example.department_management_system.enums.EmployeeStatus;
-
-import java.time.LocalDateTime;
-
 public class JwtDTO {
     private Integer id;                                                   /// Id si
     private String name;                                                  /// Ismi

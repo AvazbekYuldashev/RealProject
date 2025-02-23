@@ -2,7 +2,10 @@ package com.example.department_management_system.service;
 
 import com.example.department_management_system.dto.CompletedWorkDTO;
 import com.example.department_management_system.dto.CompletedWorkFilterDTO;
+import com.example.department_management_system.entity.ApplicationEntity;
 import com.example.department_management_system.entity.CompletedWorkEntity;
+import com.example.department_management_system.entity.DepartmentEntity;
+import com.example.department_management_system.entity.EmployeeEntity;
 import com.example.department_management_system.exp.AppBadRequestExeption;
 import com.example.department_management_system.mapper.CompletedWorkMapper;
 import com.example.department_management_system.repository.CompletedWorkCustomRepository;
@@ -36,16 +39,15 @@ public class CompletedWorkService {
     private CompletedWorkCustomRepository completedWorkCustomRepository;
 
     ///  Create CompletedWork  --> (Yangi bajarilgan ish yaratish).
-    public CompletedWorkDTO saveCompletedWork(CompletedWorkDTO completedWorkDTO) {
-        completedWorkDTO.setCreatedDate(LocalDateTime.now());
-        completedWorkDTO.setUpdatedDate(LocalDateTime.now());
-        completedWorkDTO.setVisible(true);
-        completedWorkDTO.setEmployeeId(SpringSecurityUtil.getCurrentUserId());
-        if (SpringSecurityUtil.getCurrentDepartmentId() == null){
-            throw new AppBadRequestExeption("This user department not found.");
-        }
-        completedWorkDTO.setDepartmentId(SpringSecurityUtil.getCurrentDepartmentId());
-        return toDTO(completedWorkRepository.save(toEntity(completedWorkDTO)));
+    public CompletedWorkDTO saveCompletedWork(Integer id) {
+        CompletedWorkEntity entity = new CompletedWorkEntity();
+        entity.setApplication(applicationService.getByIdEntity(id));
+        entity.setCreatedDate(LocalDateTime.now());
+        entity.setUpdatedDate(LocalDateTime.now());
+        entity.setVisible(true);
+        entity.setEmployee(employeeService.getByIdEntity(SpringSecurityUtil.getCurrentUserId()));
+        entity.setDepartment(departmentService.getByIdEntity(SpringSecurityUtil.getCurrentDepartmentId()));
+        return toDTO(completedWorkRepository.save(entity));
     }
 
     /// Get All --> (Barcha bajarilgan ishlarni olish).
@@ -62,40 +64,19 @@ public class CompletedWorkService {
     public List<CompletedWorkMapper> findByApplication(Integer applicationId) {
         return completedWorkRepository.findByApplicationMapper(applicationId);
     }
-
     /// Get by Department --> (Bo'lim Id boyicha Barcha bajarilgan ishlarni olish)
     public List<CompletedWorkMapper> findByDepartmentId(Integer departmentId) {
         return completedWorkRepository.findByDepartmentIdMapper(departmentId);
     }
-
     /// Get by Employee --> (Xodim Id boyicha Barcha bajarilgan ishlarni olish)
     public List<CompletedWorkMapper> findByEmployeeId(Integer employeeId) {
         return completedWorkRepository.findByEmployeeIdMapper(employeeId);
-    }
-
-    /// Update Employee --> (Bajargan xodimni yangilash).
-    public Boolean updateEmployee(Integer id, CompletedWorkDTO completedWorkDTO) {
-        int effectedRow =  completedWorkRepository.updateEmployee(id, completedWorkDTO.getEmployeeId(), LocalDateTime.now());
-        return effectedRow > 0;
-    }
-
-    /// Update Complated Work --> (Toliq yangilash).
-    public Boolean updateCompletedWork(Integer id, CompletedWorkDTO completedWorkDTO) {
-        int effectedRow =  completedWorkRepository.updateCompletedWork(id, completedWorkDTO.getApplicationId(),
-                completedWorkDTO.getDepartmentId(), completedWorkDTO.getEmployeeId(), LocalDateTime.now());
-        return effectedRow > 0;
     }
 
     /// Update Visible --> (Ko‘rinish holatini (visible) yangilash.)
     public Boolean deleteWipe(Integer id, Boolean visible) {
         int effectedRow = completedWorkRepository.updateVisible(id, visible, LocalDateTime.now());
         return effectedRow > 0;
-    }
-
-    /// Delete By Id --> (ID bo‘yicha Bajarilgan ishni o‘chirish.)
-    public Boolean deleteById(Integer id) {
-        completedWorkRepository.deleteById(id);
-        return true;
     }
 
     public PageImpl<CompletedWorkMapper> pagination(int page, int size){

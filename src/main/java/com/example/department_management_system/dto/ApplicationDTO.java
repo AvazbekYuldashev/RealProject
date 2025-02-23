@@ -17,10 +17,10 @@ public class ApplicationDTO {
     private String description;             /// Ariza matni
     private LocalDateTime createdDate;      /// Ariza yaratilgan sanasi
     private LocalDateTime updatedDate;      /// Ariza o'zgartirilgan sanasi
+    @NotNull(message = "Offering Id required")
     private Integer offeringId;             /// Xizmat ID
     private Integer createdById;            /// Arizani yuborgan xodim ID
     private Integer assignedToId;           /// Arizani ko'rib chiqadigan xodim ID
-    @NotNull(message = "Department Id required")
     private Integer departmentId;           /// Ariza yuborilayotgan bo'lim ID
     private ApplicationStatus status;       /// Ariza xolati
     private Integer completedWorkId;        /// Ariza bajarilganligi xaqida ma'lumot

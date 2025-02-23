@@ -1,7 +1,6 @@
 package com.example.department_management_system.util;
 
 import com.example.department_management_system.dto.auth.JwtDTO;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

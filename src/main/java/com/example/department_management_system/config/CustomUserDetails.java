@@ -1,7 +1,6 @@
 package com.example.department_management_system.config;
 
 import com.example.department_management_system.entity.EmployeeEntity;
-import com.example.department_management_system.enums.EmployeeRole;
 import com.example.department_management_system.enums.EmployeeStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -21,16 +21,8 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-    ///  Create
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("")
-    public ResponseEntity<EmployeeDTO> create(@RequestBody EmployeeDTO employeeDTO) {
-        EmployeeDTO createdEmployee = employeeService.create(employeeDTO);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
-    }
     ///  Get all
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<EmployeeMapper>> getAll() {
@@ -38,7 +30,6 @@ public class EmployeeController {
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
     ///  Get By Id
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeMapper> getById(@PathVariable("id") Integer id) {
@@ -112,13 +103,6 @@ public class EmployeeController {
     @PutMapping("/wipe")
     public ResponseEntity<?> deleteWipe() {
         Boolean isUpdate = employeeService.deleteWipe();
-        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity<?> updateVisible(@PathVariable("id") Integer id) {
-        Boolean isUpdate = employeeService.deleteById(id);
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
 

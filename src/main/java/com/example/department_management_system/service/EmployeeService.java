@@ -44,55 +44,25 @@ public class EmployeeService {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new AppBadRequestExeption("Employee not found with id: " + id));
     }
-
-
-    ///  Create Employee
-    @Transactional
-    public EmployeeDTO create(EmployeeDTO dto) {
-        checkAdminAccess();
-        emailValidC(dto.getEmail());
-        EmployeeEntity entity = new EmployeeEntity();
-        entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
-        entity.setRole(dto.getRole());
-        entity.setPosition(dto.getPosition());
-        entity.setStatus(EmployeeStatus.ACTIVE);
-        entity.setCreatedDate(LocalDateTime.now());
-        entity.setUpdatedDate(LocalDateTime.now());
-        entity.setVisible(true);
-        entity.setEmail(dto.getEmail());
-        entity.setPassword(bc.encode(dto.getPassword()));
-        employeeRepository.save(entity);
-        dto.setId(entity.getId());
-        dto.setCreatedDate(entity.getCreatedDate());
-        dto.setUpdatedDate(entity.getUpdatedDate());
-        dto.setStatus(entity.getStatus());
-        dto.setVisible(entity.getVisible());
-        dto.setPassword("");
-        return dto;
-    }
     ///  Get All Employee
     public List<EmployeeMapper> getAll() {
-        checkAdminAccess();
+        chekSuperAdminAccess();
         return employeeRepository.findAllMapper();
     }
-
     ///  Get Employee By Id
     public EmployeeMapper getById(Integer id) {
         checkAdminAccess();
-        return employeeRepository.findByIdMapper(id).orElseThrow(() ->
-                new AppBadRequestExeption("Employee not found with id: " + id)
-        );
+        chekSuperAdminAccess();
+        return employeeRepository.findByIdMapper(id).orElseThrow(() -> new AppBadRequestExeption("Employee not found with id: " + id));
     }
-
     public EmployeeMapper getMe() {
         return employeeRepository.findByIdMapper(SpringSecurityUtil.getCurrentUserId()).orElseThrow(() ->
                 new AppBadRequestExeption("Employee not found with id: " + SpringSecurityUtil.getCurrentUserId())
         );
     }
-
     /// berilgan bolimdagi xodimlar royxati
     public List<EmployeeMapper> getByDepartmentId(Integer departmentId) {
+        checkAdminAccess();
         Integer currentDepartmentId = SpringSecurityUtil.getCurrentDepartmentId();
         if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN) || currentDepartmentId != null && currentDepartmentId.equals(departmentId)) {
             return employeeRepository.findByDepartmentMapper(departmentId);
@@ -101,10 +71,9 @@ public class EmployeeService {
         }
         throw new AppBadRequestExeption("It does not belong to the current profile.");
     }
-
     @Transactional
     public Boolean updateRole(Integer id, EmployeeDTO employeeDTO) {
-        checkAdminAccess();
+        chekSuperAdminAccess();
         EmployeeEntity employee = getByIdEntity(id);
         if (employee == null) {
             throw new AppBadRequestExeption("Employee ID not found: " + id);
@@ -115,10 +84,9 @@ public class EmployeeService {
         int effectedRow = employeeRepository.updateRole(id, employeeDTO.getRole(), LocalDateTime.now());
         return effectedRow > 0;
     }
-
     @Transactional
     public Boolean updatePosition(Integer id, EmployeeDTO employeeDTO) {
-        checkAdminAccess();
+        chekSuperAdminAccess();
         EmployeeEntity employee = getByIdEntity(id);
         if (employee == null) {
             throw new AppBadRequestExeption("Employee ID not found: " + id);
@@ -126,10 +94,9 @@ public class EmployeeService {
         int effectedRow = employeeRepository.updatePosition(id, employeeDTO.getPosition(), LocalDateTime.now());
         return effectedRow > 0;
     }
-
     @Transactional
     public Boolean updateStatus(Integer id, EmployeeDTO employeeDTO) {
-        checkAdminAccess();
+        chekSuperAdminAccess();
         EmployeeEntity employee = getByIdEntity(id);
         if (employee == null) {
             throw new AppBadRequestExeption("Employee ID not found: " + id);
@@ -137,10 +104,9 @@ public class EmployeeService {
         int effectedRow = employeeRepository.updateStatus(id, employeeDTO.getStatus(), LocalDateTime.now());
         return effectedRow > 0;
     }
-
     @Transactional
     public Boolean updateDepartment(Integer id, EmployeeDTO employeeDTO) {
-        checkAdminAccess();
+        chekSuperAdminAccess();
         EmployeeEntity employee = getByIdEntity(id);
         if (employee == null) {
             throw new AppBadRequestExeption("Employee ID not found: " + id);
@@ -171,14 +137,25 @@ public class EmployeeService {
         }
         throw new AppBadRequestExeption("It does not belong to the current profile.");
     }
-
+    private Boolean updateUser(Integer id, EmployeeUpdateDTO employeeUpdateDTO) {
+        int effectedRow = employeeRepository.updateCurrentUser(id, employeeUpdateDTO.getName(), employeeUpdateDTO.getSurname(),
+                employeeUpdateDTO.getEmail(), employeeUpdateDTO.getPassword(), LocalDateTime.now());
+        return effectedRow > 0;
+    }
+    private Boolean updateAdmin(Integer id, EmployeeUpdateDTO employeeUpdateDTO){
+        chekSuperAdminAccess();
+        int effectedRow = employeeRepository.updateEmployee(id, employeeUpdateDTO.getName(),
+                employeeUpdateDTO.getSurname(), employeeUpdateDTO.getRole(), employeeUpdateDTO.getPosition(),
+                employeeUpdateDTO.getStatus(), employeeUpdateDTO.getDepartmentId(),
+                employeeUpdateDTO.getEmail(), employeeUpdateDTO.getPassword(), LocalDateTime.now());
+        return effectedRow > 0;
+    }
     @Transactional
     public Boolean deleteWipeA(Integer id, Boolean visible) {
-        checkAdminAccess();
+        chekSuperAdminAccess();
         int effectedRow = employeeRepository.updateVisible(id, visible, LocalDateTime.now());
         return effectedRow > 0;
     }
-
     @Transactional
     public Boolean deleteWipe() {
         if (SpringSecurityUtil.getCurrentUserId().equals(1)){
@@ -186,17 +163,6 @@ public class EmployeeService {
         }
         int effectedRow = employeeRepository.updateVisible(SpringSecurityUtil.getCurrentUserId(), false, LocalDateTime.now());
         return effectedRow > 0;
-    }
-
-    @Transactional
-    public Boolean deleteById(Integer id) {
-        checkAdminAccess();
-        EmployeeEntity employee = getByIdEntity(id);
-        if (employee != null && id != 1) {
-            employeeRepository.deleteById(id);
-            return true;
-        }
-        return false;
     }
 
     public PageImpl<EmployeeMapper> pagination(int page, int size){
@@ -217,16 +183,7 @@ public class EmployeeService {
         }
         return new PageImpl<>(dtoResult, PageRequest.of(page, size), result.getTotalElements());
     }
-
-
-
-
-
-
-
-
-
-
+    /// Method to convert EmployeeEntity to EmployeeDTO
     public EmployeeDTO toDto(EmployeeEntity entity) {
         if (entity == null) {return null;}
         EmployeeDTO dto = new EmployeeDTO();
@@ -243,8 +200,7 @@ public class EmployeeService {
         if (entity.getDepartment() != null) {dto.setDepartmentId(entity.getDepartment().getId());}
         return dto;
     }
-
-    // Method to convert EmployeeDTO to EmployeeEntity
+    /// Method to convert EmployeeDTO to EmployeeEntity
     public EmployeeEntity toEntity(EmployeeDTO dto) {
         if (dto == null) {return null;}
         EmployeeEntity entity = new EmployeeEntity();
@@ -263,22 +219,8 @@ public class EmployeeService {
         return entity;
     }
 
-    private Boolean updateUser(Integer id, EmployeeUpdateDTO employeeUpdateDTO) {
-        int effectedRow = employeeRepository.updateCurrentUser(id, employeeUpdateDTO.getName(), employeeUpdateDTO.getSurname(),
-                employeeUpdateDTO.getEmail(), employeeUpdateDTO.getPassword(), LocalDateTime.now());
-        return effectedRow > 0;
-    }
-
-    private Boolean updateAdmin(Integer id, EmployeeUpdateDTO employeeUpdateDTO){
-        int effectedRow = employeeRepository.updateEmployee(id, employeeUpdateDTO.getName(),
-                employeeUpdateDTO.getSurname(), employeeUpdateDTO.getRole(), employeeUpdateDTO.getPosition(),
-                employeeUpdateDTO.getStatus(), employeeUpdateDTO.getDepartmentId(),
-                employeeUpdateDTO.getEmail(), employeeUpdateDTO.getPassword(), LocalDateTime.now());
-        return effectedRow > 0;
-    }
-
     private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())) {
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
             throw new AppBadRequestExeption("It does not belong to the current profile.");
         }
     }
@@ -289,14 +231,6 @@ public class EmployeeService {
             if (!entity.get().getId().equals(id)) { // Email boshqa odamniki bo'lsa
                 throw new AppBadRequestExeption("This email is busy.");
             }
-        }
-        return true; // Agar email mavjud bo'lsa va aynan shu userniki bo'lsa yoki umuman yo'q bo'lsa, true qaytaradi
-    }
-
-    private Boolean emailValidC(String email) {
-        Optional<EmployeeEntity> entity = employeeRepository.findByEmailAndVisibleTrue(email);
-        if (entity.isPresent()) { // Agar email bazada bo'lsa
-                throw new AppBadRequestExeption("This email is busy.");
         }
         return true; // Agar email mavjud bo'lsa va aynan shu userniki bo'lsa yoki umuman yo'q bo'lsa, true qaytaradi
     }
@@ -319,6 +253,10 @@ public class EmployeeService {
         }
     }
 
+    private void chekSuperAdminAccess() {
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
+            throw new AppBadRequestExeption("It does not belong to the current profile.");}
+    }
 
 
 }

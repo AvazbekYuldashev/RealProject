@@ -122,13 +122,7 @@ public class EmployeeEntity {
         this.department = department;
     }
 
-    public List<ApplicationEntity> getApplications() {
-        return applications;
-    }
 
-    public void setApplications(List<ApplicationEntity> applications) {
-        this.applications = applications;
-    }
 
     public List<ApplicationEntity> getAssignedApplications() {
         return assignedApplications;

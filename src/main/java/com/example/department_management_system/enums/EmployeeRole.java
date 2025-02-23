@@ -1,5 +1,5 @@
 package com.example.department_management_system.enums;
 
 public enum EmployeeRole {
-    ADMIN, USER
+    ADMIN, USER, SUPERADMIN
 }

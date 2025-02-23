@@ -87,27 +87,11 @@ public class ApplicationController {
         Boolean isUpdate = applicationService.updateStatus(id, applicationDTO);
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
-
-
-    /// Update application
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateApplication(@PathVariable("id") Integer id, @RequestBody ApplicationDTO applicationDTO) {
-        Boolean isUpdate = applicationService.updateApplication(id, applicationDTO);
-        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
-    }
     /// Delete for visible
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PatchMapping("/{id}/wipe")
     public ResponseEntity<?> updateVisible(@PathVariable("id") Integer id, @RequestBody ApplicationFilterDTO visible) {
         Boolean isUpdate = applicationService.updateVisible(id, visible.getVisible());
-        return new ResponseEntity<>(isUpdate, HttpStatus.OK);
-    }
-    /// Delete By Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> updateVisible(@PathVariable("id") Integer id) {
-        Boolean isUpdate = applicationService.deleteById(id);
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
     /// Pagination
@@ -118,6 +102,7 @@ public class ApplicationController {
         PageImpl<ApplicationMapper> applicationDTOS = applicationService.pagination(getCurrentPage(page), size);
         return new ResponseEntity<>(applicationDTOS, HttpStatus.OK);
     }
+
     ///  Filter
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/filter")

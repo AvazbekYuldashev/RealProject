@@ -30,6 +30,4 @@ public class ProfileController {
         ResponseDTO result = profileService.authorization(authDTO);
         return ResponseEntity.ok().body(result);
     }
-
-
 }

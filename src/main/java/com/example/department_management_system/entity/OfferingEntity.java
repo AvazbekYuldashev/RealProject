@@ -23,11 +23,11 @@ public class OfferingEntity {
     private LocalDateTime createdDate;                      /// Yaratilgan sanasi
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;                      /// O'zgartirilgan sanasi
-    @OneToMany(mappedBy = "offering")
-    private List<ApplicationEntity> applications;           /// Xizmatga bog'langan arizalar
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
     private DepartmentEntity department;                    /// Xizmatga bog'langan bo'lim (department)
+
     @Column(name = "visible", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean visible;                                /// korinishi
 
@@ -78,14 +78,6 @@ public class OfferingEntity {
 
     public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
-    }
-
-    public List<ApplicationEntity> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<ApplicationEntity> applications) {
-        this.applications = applications;
     }
 
     public DepartmentEntity getDepartment() {
