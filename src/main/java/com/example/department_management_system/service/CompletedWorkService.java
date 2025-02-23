@@ -2,11 +2,7 @@ package com.example.department_management_system.service;
 
 import com.example.department_management_system.dto.CompletedWorkDTO;
 import com.example.department_management_system.dto.CompletedWorkFilterDTO;
-import com.example.department_management_system.entity.ApplicationEntity;
 import com.example.department_management_system.entity.CompletedWorkEntity;
-import com.example.department_management_system.entity.DepartmentEntity;
-import com.example.department_management_system.entity.EmployeeEntity;
-import com.example.department_management_system.exp.AppBadRequestExeption;
 import com.example.department_management_system.mapper.CompletedWorkMapper;
 import com.example.department_management_system.repository.CompletedWorkCustomRepository;
 import com.example.department_management_system.repository.CompletedWorkRepository;
@@ -39,7 +35,7 @@ public class CompletedWorkService {
     private CompletedWorkCustomRepository completedWorkCustomRepository;
 
     ///  Create CompletedWork  --> (Yangi bajarilgan ish yaratish).
-    public CompletedWorkDTO saveCompletedWork(Integer id) {
+    public void saveCompletedWork(Integer id) {
         CompletedWorkEntity entity = new CompletedWorkEntity();
         entity.setApplication(applicationService.getByIdEntity(id));
         entity.setCreatedDate(LocalDateTime.now());
@@ -47,7 +43,7 @@ public class CompletedWorkService {
         entity.setVisible(true);
         entity.setEmployee(employeeService.getByIdEntity(SpringSecurityUtil.getCurrentUserId()));
         entity.setDepartment(departmentService.getByIdEntity(SpringSecurityUtil.getCurrentDepartmentId()));
-        return toDTO(completedWorkRepository.save(entity));
+        completedWorkRepository.save(entity);
     }
 
     /// Get All --> (Barcha bajarilgan ishlarni olish).

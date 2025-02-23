@@ -156,7 +156,7 @@ public class OfferingService {
     }
 
     private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())) {
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
             throw new AppBadRequestExeption("It does not belong to the current profile.");
         }
     }
