@@ -219,12 +219,6 @@ public class EmployeeService {
         return entity;
     }
 
-    private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
-            throw new AppBadRequestExeption("It does not belong to the current profile.");
-        }
-    }
-
     private Boolean emailValid(String email, Integer id) {
         Optional<EmployeeEntity> entity = employeeRepository.findByEmailAndVisibleTrue(email);
         if (entity.isPresent()) { // Agar email bazada bo'lsa
@@ -250,6 +244,13 @@ public class EmployeeService {
         }
         if (employeeUpdateDTO.getSurname() != null && employeeUpdateDTO.getSurname().trim().isEmpty()) {
             throw new AppBadRequestExeption("The surname must not be blank.");
+        }
+    }
+
+    private void checkAdminAccess() {
+        String currentRole = SpringSecurityUtil.getCurrentEmployeeRole();
+        if (!(currentRole.equals(EmployeeRole.ADMIN.toString()) || currentRole.equals(EmployeeRole.SUPERADMIN.toString()))) {
+            throw new AppBadRequestExeption("It does not belong to the current profile.");
         }
     }
 

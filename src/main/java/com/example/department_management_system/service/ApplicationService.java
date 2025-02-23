@@ -199,8 +199,10 @@ public class ApplicationService {
         return applicationEntity.get();
     }
     private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
-            throw new AppBadRequestExeption("It does not belong to the current profile.");}
+        String currentRole = SpringSecurityUtil.getCurrentEmployeeRole();
+        if (!(currentRole.equals(EmployeeRole.ADMIN.toString()) || currentRole.equals(EmployeeRole.SUPERADMIN.toString()))) {
+            throw new AppBadRequestExeption("It does not belong to the current profile.");
+        }
     }
     private void chekStatus(ApplicationStatus status){
         if (!(status.equals(ApplicationStatus.SENT) ||

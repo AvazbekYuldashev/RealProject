@@ -159,7 +159,8 @@ public class DepartmentService {
     }
 
     private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
+        String currentRole = SpringSecurityUtil.getCurrentEmployeeRole();
+        if (!(currentRole.equals(EmployeeRole.ADMIN.toString()) || currentRole.equals(EmployeeRole.SUPERADMIN.toString()))) {
             throw new AppBadRequestExeption("It does not belong to the current profile.");
         }
     }
