@@ -21,56 +21,56 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PostMapping("")
     public ResponseEntity<?> createDepartment(@RequestBody DepartmentDTO departmentDTO) {
         DepartmentDTO createdDepartment = departmentService.createDepartment(departmentDTO);
         return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<?>> getAllDepartment() {
         List<DepartmentMapper> all = departmentService.getAll();
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getDepartmentById(@PathVariable("id") Integer id) {
         DepartmentMapper byId = departmentService.getById(id);
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDepartment(@PathVariable Integer id, @RequestBody DepartmentDTO departmentDTO) {
         Boolean isUpdated = departmentService.update(id, departmentDTO);
         return new ResponseEntity<>(isUpdated, isUpdated ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateStatus(@PathVariable Integer id, @RequestBody DepartmentDTO departmentDTO) {
         Boolean isUpdated = departmentService.updateStatus(id, departmentDTO);
         return new ResponseEntity<>(isUpdated, isUpdated ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PatchMapping("/{id}/wipe")
     public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody DepartmentFilterDTO departmentDTO) {
         Boolean isUpdate = departmentService.deleteWipe(id, departmentDTO.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
         Boolean isUpdate = departmentService.deleteById(id);
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/paged")
     public ResponseEntity<PageImpl<DepartmentMapper>> pagination(@RequestParam("page") int page,
                                                                  @RequestParam("size") int size) {
@@ -78,7 +78,7 @@ public class DepartmentController {
         return new ResponseEntity<>(departmentDTO, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PostMapping("/filter")
     public ResponseEntity<PageImpl<DepartmentDTO>> filter(@RequestParam(value = "page", defaultValue = "1") int page,
                                                           @RequestParam(value = "size", defaultValue = "30") int size,

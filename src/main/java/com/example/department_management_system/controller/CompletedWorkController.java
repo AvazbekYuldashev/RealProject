@@ -21,14 +21,14 @@ public class CompletedWorkController {
     @Autowired
     private CompletedWorkService completedWorkService;
     ///  Get all
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/all")
     private ResponseEntity<List<CompletedWorkMapper>> getAll() {
         List<CompletedWorkMapper> completedWorkDTO = completedWorkService.getAll();
         return new ResponseEntity<>(completedWorkDTO, HttpStatus.OK);
     }
     ///  Get By Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<CompletedWorkMapper> getById(@PathVariable("id") Integer id) {
         CompletedWorkMapper completedWorkDTO = completedWorkService.getById(id);
@@ -38,14 +38,14 @@ public class CompletedWorkController {
         return new ResponseEntity<>(completedWorkDTO, HttpStatus.OK);
     }
     /// Get By Application Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}/application")
     public ResponseEntity<List<CompletedWorkMapper>> getByApplication(@PathVariable("id") Integer id) {
         List<CompletedWorkMapper> completedWorkDTO = completedWorkService.findByApplication(id);
         return new ResponseEntity<>(completedWorkDTO, HttpStatus.OK);
     }
     /// Get By applicaation Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}/department")
     public ResponseEntity<List<CompletedWorkMapper>> getByDepartmentId(@PathVariable("id") Integer id) {
         List<CompletedWorkMapper> completedWorkDTO = completedWorkService.findByDepartmentId(id);
@@ -53,20 +53,20 @@ public class CompletedWorkController {
     }
     /// Get By Complated Employee Id
     @GetMapping("/{id}/employee")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     public ResponseEntity<List<CompletedWorkMapper>> getByEmployeeId(@PathVariable("id") Integer id) {
         List<CompletedWorkMapper> completedWorkDTO = completedWorkService.findByEmployeeId(id);
         return new ResponseEntity<>(completedWorkDTO, HttpStatus.OK);
     }
     ///  Delete by Id for visible
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PatchMapping("/{id}/wipe")
     public ResponseEntity<?> deleteWipe(@PathVariable("id") Integer id, @RequestBody CompletedWorkDTO completedWorkDTO) {
         Boolean isUpdate = completedWorkService.deleteWipe(id, completedWorkDTO.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
     ///  Pagination
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/paged")
     public ResponseEntity<PageImpl<CompletedWorkMapper>> pagination(@RequestParam("page") int page,
                                                             @RequestParam("size") int size) {
@@ -74,7 +74,7 @@ public class CompletedWorkController {
         return new ResponseEntity<>(completedWorkDTOS, HttpStatus.OK);
     }
     ///  Filter
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PostMapping("/filter")
     public ResponseEntity<PageImpl<CompletedWorkDTO>> filter(@RequestParam(value = "page", defaultValue = "1") int page,
                                                           @RequestParam(value = "size", defaultValue = "30") int size,

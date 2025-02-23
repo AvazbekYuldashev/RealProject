@@ -23,21 +23,21 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     ///  Get all
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<EmployeeMapper>> getAll() {
         List<EmployeeMapper> all = employeeService.getAll();
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
     ///  Get By Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeMapper> getById(@PathVariable("id") Integer id) {
         EmployeeMapper byId = employeeService.getById(id);
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/getMe")
     public ResponseEntity<EmployeeMapper> getMe() {
         EmployeeMapper byId = employeeService.getMe();
@@ -45,7 +45,7 @@ public class EmployeeController {
     }
 
     ///  Get by department Id
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}/department")
     public ResponseEntity<List<EmployeeMapper>> getAllByDepartment(@PathVariable("id") Integer id) {
         List<EmployeeMapper> byDepartment = employeeService.getByDepartmentId(id);
@@ -53,7 +53,7 @@ public class EmployeeController {
     }
 
     ///  Update role
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}/role")
     public ResponseEntity<Boolean> updateRole(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
         Boolean isUpdated = employeeService.updateRole(id, employeeDTO);
@@ -61,7 +61,7 @@ public class EmployeeController {
     }
 
     ///  Update position
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}/position")
     public ResponseEntity<Boolean> updatePosition(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
         Boolean isUpdated = employeeService.updatePosition(id, employeeDTO);
@@ -69,7 +69,7 @@ public class EmployeeController {
     }
 
     ///  Update Status
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}/status")
     public ResponseEntity<Boolean> updateStatus(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
         Boolean isUpdated = employeeService.updateStatus(id, employeeDTO);
@@ -77,7 +77,7 @@ public class EmployeeController {
     }
 
     /// Update department
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}/department")
     public ResponseEntity<Boolean> updateDepartment(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
         Boolean isUpdated = employeeService.updateDepartment(id, employeeDTO);
@@ -85,28 +85,28 @@ public class EmployeeController {
     }
 
     /// Update
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Boolean> updateEmployee(@Valid @PathVariable Integer id, @RequestBody EmployeeUpdateDTO employeeUpdateDTO) {
         Boolean isUpdated = employeeService.updateEmployee(id, employeeUpdateDTO);
         return new ResponseEntity<>(isUpdated, isUpdated ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/{id}/wipe")
     public ResponseEntity<?> deleteWipeA(@PathVariable("id") Integer id, @RequestBody EmployeeFilterDTO employeeDTO) {
         Boolean isUpdate = employeeService.deleteWipeA(id, employeeDTO.getVisible());
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PutMapping("/wipe")
     public ResponseEntity<?> deleteWipe() {
         Boolean isUpdate = employeeService.deleteWipe();
         return new ResponseEntity<>(isUpdate, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/paged")
     public ResponseEntity<PageImpl<EmployeeMapper>> pagination(@RequestParam("page") int page,
                                                               @RequestParam("size") int size) {
@@ -114,7 +114,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeDTOS, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @PostMapping("/filter")
     public ResponseEntity<PageImpl<EmployeeDTO>> filter(@RequestParam(value = "page", defaultValue = "1") int page,
                                                           @RequestParam(value = "size", defaultValue = "30") int size,

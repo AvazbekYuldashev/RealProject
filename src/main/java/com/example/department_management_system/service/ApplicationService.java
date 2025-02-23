@@ -88,6 +88,10 @@ public class ApplicationService {
     public Boolean updateVisible(Integer id, Boolean visible) {
         ApplicationEntity application = getByIdEntity(id);
         if (application.getCreatedBy().getId().equals(SpringSecurityUtil.getCurrentUserId())){
+            ApplicationEntity entity = getByIdEntity(id);
+            if (!entity.getStatus().equals(ApplicationStatus.SENT)){
+                throw new AppBadRequestExeption("This user cannot this application delete");
+            }
             int effectedRow = applicationRepository.updateVisible(id, visible, LocalDateTime.now());
             return effectedRow > 0;
         }
