@@ -133,29 +133,52 @@ public class ApplicationService {
             return effectedRow > 0;
         }else {throw new AppBadRequestExeption("This User this application cannot be modified.");}
     }
+
     /// Update --> (Holatni yangilash).
-    public Boolean updateStatusReject(Integer id, ApplicationDTO applicationDTO) {
+    public boolean updateStatus(Integer id, ApplicationDTO applicationDTO) {
         ApplicationEntity application = getByIdEntity(id);
-        if (application.getStatus() != null) {chekStatus(applicationDTO.getStatus());}
-        if (application.getStatus().equals(ApplicationStatus.REJECTED.toString())) {
-            int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
-            return effectedRow > 0;}
-        throw new AppBadRequestExeption("Please indicate the status of the application. The application can be in progress and completed.");
-    }
-    /// Update --> (Holatni yangilash).
-    public Boolean updateStatus(Integer id, ApplicationDTO applicationDTO) {
-        ApplicationEntity application = getByIdEntity(id);
-        if (application.getStatus() != null) {chekStatus(applicationDTO.getStatus());}
-        if (application.getStatus().equals(ApplicationStatus.IN_PROGRESS.toString()) || application.getStatus().equals(ApplicationStatus.COMPLETED.toString())) {
-            int effectedRow =  applicationRepository.updateStatus(id, applicationDTO.getStatus(), LocalDateTime.now());
-            if (application.getStatus().equals(ApplicationStatus.COMPLETED.toString())) {
-                completedWorkService.saveCompletedWork(application.getId());
-            }
-            return effectedRow > 0;}
-        throw new AppBadRequestExeption("Please indicate the status of the application. The application can be in progress and completed.");
+        EmployeeRole userRole = EmployeeRole.valueOf(SpringSecurityUtil.getCurrentEmployeeRole());
+
+        if (applicationDTO.getStatus() == null) {
+            throw new AppBadRequestExeption("Please indicate the status of the application.");
+        }
+
+        // Statusni ENUM formatiga o'tkazish
+        ApplicationStatus status = applicationDTO.getStatus();
+        chekStatus(status); // Statusni tekshirish
+
+        // Ruxsatni tekshirish
+        if (!hasPermissionToUpdate(userRole, status)) {
+            throw new AppBadRequestExeption("You do not have permission to change the status to " + status);
+        }
+
+        // Statusni yangilash
+        boolean isUpdated = applyStatusUpdate(id, status);
+
+        // Agar status COMPLETED bo‘lsa, qo‘shimcha saqlash
+        if (isUpdated && status == ApplicationStatus.COMPLETED) {
+            completedWorkService.saveCompletedWork(application.getId());
+        }
+        
+        return isUpdated;
     }
 
+    // **Foydalanuvchi rolini tekshirish**
+    private boolean hasPermissionToUpdate(EmployeeRole userRole, ApplicationStatus status) {
+        return (userRole == EmployeeRole.SUPERADMIN && (status == ApplicationStatus.APPROVED || status == ApplicationStatus.REJECTED))
+                || (userRole == EmployeeRole.ADMIN && (status == ApplicationStatus.IN_PROGRESS || status == ApplicationStatus.COMPLETED));
+    }
 
+    // **Status yangilash metodini soddalashtirish**
+    private boolean applyStatusUpdate(Integer id, ApplicationStatus status) {
+        return applicationRepository.updateStatus(id, status, LocalDateTime.now()) > 0;
+    }
+
+    // **ApplicationEntity ni ID bo‘yicha olish**
+    public ApplicationEntity getByIdEntity(Integer id) {
+        return applicationRepository.findById(id)
+                .orElseThrow(() -> new AppBadRequestExeption("Application does not exist."));
+    }
     ///  ToDTO --> (Entity'ni DTO'ga o‘tkazish).
     public ApplicationDTO toDTO(ApplicationEntity entity) {
         if (entity == null) {return null;}
@@ -191,12 +214,6 @@ public class ApplicationService {
         if (dto.getDepartmentId() != null) {entity.setDepartment(departmentService.getByIdEntity(dto.getDepartmentId()));}
         if (dto.getCompletedWorkId() != null) {entity.setCompletedWork(completedWorkService.getByIdEntity(dto.getCompletedWorkId()));}
         return entity;
-    }
-    ///  Get by Id Entity --> (ID bo‘yicha ApplicationEntityni qaytarish)
-    public ApplicationEntity getByIdEntity(Integer id){
-        Optional<ApplicationEntity> applicationEntity = applicationRepository.findById(id);
-        if (applicationEntity.isEmpty()) {throw new AppBadRequestExeption("Application does not exist.");}
-        return applicationEntity.get();
     }
     private void checkAdminAccess() {
         String currentRole = SpringSecurityUtil.getCurrentEmployeeRole();
