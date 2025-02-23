@@ -33,7 +33,7 @@ public class DepartmentService {
     ///  Create Department
     @Transactional
     public DepartmentDTO createDepartment(DepartmentDTO departmentDTO) {
-        checkAdminAccess();
+        checkSuperAdminAccess();
         departmentDTO.setCreatedDate(LocalDateTime.now());
         departmentDTO.setUpdatedDate(LocalDateTime.now());
         departmentDTO.setVisible(true);
@@ -48,7 +48,7 @@ public class DepartmentService {
     /// Get By Id
     public DepartmentMapper getById(Integer id) {
         if (SpringSecurityUtil.getCurrentDepartmentId() != id) {
-            checkAdminAccess();
+            checkSuperAdminAccess();
         }
         return departmentRepository.getByIdMapper(id)
                 .orElseThrow(() -> new AppBadRequestExeption("Department not found with id: " + id));
@@ -57,7 +57,7 @@ public class DepartmentService {
     @Transactional
     public Boolean updateStatus(Integer id, DepartmentDTO departmentDTO) {
         if (SpringSecurityUtil.getCurrentDepartmentId() != id) {
-            checkAdminAccess();
+            checkSuperAdminAccess();
         }
         return departmentRepository.updateStatus(id, departmentDTO.getStatus(), LocalDateTime.now()) > 0;
     }
@@ -65,7 +65,7 @@ public class DepartmentService {
     @Transactional
     public Boolean update(Integer id, DepartmentDTO departmentDTO) {
         if (SpringSecurityUtil.getCurrentDepartmentId() != id) {
-            checkAdminAccess();
+            checkSuperAdminAccess();
         }
         int effectedRow = departmentRepository.updateDepartment(id,
                 departmentDTO.getStatus(), departmentDTO.getTitle(),
@@ -78,7 +78,7 @@ public class DepartmentService {
     @Transactional
     public Boolean deleteWipe(Integer id, Boolean visible) {
         if (SpringSecurityUtil.getCurrentDepartmentId() != id) {
-            checkAdminAccess();
+            checkSuperAdminAccess();
         }
         DepartmentEntity e = getByIdEntity(id);
         if (e == null) {
@@ -90,7 +90,7 @@ public class DepartmentService {
     /// Delete by id
     @Transactional
     public Boolean deleteById(Integer id) {
-        checkAdminAccess();
+        checkSuperAdminAccess();
         DepartmentEntity e = getByIdEntity(id);
         if (e == null) {
             throw new AppBadRequestExeption("Department not found with id: " + id);
@@ -159,7 +159,13 @@ public class DepartmentService {
     }
 
     private void checkAdminAccess() {
-        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())) {
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString()) || !SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
+            throw new AppBadRequestExeption("It does not belong to the current profile.");
+        }
+    }
+
+    private void checkSuperAdminAccess() {
+        if (!SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString() )) {
             throw new AppBadRequestExeption("It does not belong to the current profile.");
         }
     }

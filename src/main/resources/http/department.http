@@ -1,11 +1,11 @@
 ### Bo'lim yaratish
-POST http://localhost:8080/department
+POST https://rttm.astiedu.uz/api/department
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJ2aXNpYmxlIjp0cnVlLCJzdXJuYW1lIjoiRG9lIiwibmFtZSI6IkpvaG4iLCJpZCI6MSwicG9zaXRpb24iOiJTb2Z0d2FyZSBEZXZlbG9wZXIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDAxMjIzOTIsImV4cCI6MTc0MDIwODc5Mn0.JUg-S1VMLqfwYRI6aFihl5HL92qvDiKJqg83bgUA1es
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiU1VQRVJBRE1JTiIsInZpc2libGUiOnRydWUsInN1cm5hbWUiOiJZdWxkYXNoZXYiLCJuYW1lIjoiQXZhemJlayIsImlkIjoxLCJwb3NpdGlvbiI6IldlYi1kaXpheW5lciIsImVtYWlsIjoiYXZhemJlay55dWxkYXNoZXZAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJBQ1RJVkUiLCJzdWIiOiJhdmF6YmVrLnl1bGRhc2hldkBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDMwNzk5MiwiZXhwIjoxNzQwMzk0MzkyfQ.IuK45vFKI2RE6V2qApHDiv-PlAgPOQbWGMVKRtjQr10
 
 {
-  "title": "IT Department",
-  "description": "Responsible for IT infrastructure",
+  "title": "RTTM",
+  "description": "Raqamli Talim Texnalogialar Mazrkazi",
   "phoneNumber": "+998902597890",
   "headOfDepartment": "Ali aliyev",
   "type": "TECHNICAL",

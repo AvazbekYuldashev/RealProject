@@ -3,12 +3,12 @@ POST https://rttm.astiedu.uz/api/profile/registration
 Content-Type: application/json
 
 {
-  "name": "John",
-  "surname": "Doe",
-  "role": "ADMIN",
-  "position": "Software Developer",
-  "email": "john.doee@example.com",
-  "password": "securePassword123",
+  "name": "Avazbek",
+  "surname": "Yuldashev",
+  "role": "SUPERADMIN",
+  "position": "Web-dizayner",
+  "email": "avazbek.yuldashev@example.com",
+  "password": "Greed1212"
 
 }
 
@@ -17,8 +17,8 @@ POST http://rttm.astiedu.uz/api/profile/authorization
 Content-Type: application/json
 
 {
-  "email": "john.doee@example.com",
-  "password": "securePassword123"
+  "email": "avazbek.yuldashev@example.com",
+  "password": "Greed1212"
 }
 
 ### Authorization API Test
