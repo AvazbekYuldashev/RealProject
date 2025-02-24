@@ -18,7 +18,7 @@ import java.util.List;
 ///  Xodimlar
 @RestController
 @RequestMapping("/employee")
-public class EmployeeController {
+public class    EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 

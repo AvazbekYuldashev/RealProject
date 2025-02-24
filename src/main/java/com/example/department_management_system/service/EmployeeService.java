@@ -6,7 +6,6 @@ import com.example.department_management_system.dto.EmployeeUpdateDTO;
 import com.example.department_management_system.entity.DepartmentEntity;
 import com.example.department_management_system.entity.EmployeeEntity;
 import com.example.department_management_system.enums.EmployeeRole;
-import com.example.department_management_system.enums.EmployeeStatus;
 import com.example.department_management_system.exp.AppBadRequestExeption;
 import com.example.department_management_system.mapper.EmployeeMapper;
 import com.example.department_management_system.repository.DepartmentRepository;
@@ -64,7 +63,7 @@ public class EmployeeService {
     public List<EmployeeMapper> getByDepartmentId(Integer departmentId) {
         checkAdminAccess();
         Integer currentDepartmentId = SpringSecurityUtil.getCurrentDepartmentId();
-        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN) || currentDepartmentId != null && currentDepartmentId.equals(departmentId)) {
+        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN) || SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN) || currentDepartmentId != null && currentDepartmentId.equals(departmentId)) {
             return employeeRepository.findByDepartmentMapper(departmentId);
         } else if(currentDepartmentId == null) {
             throw new AppBadRequestExeption("Current Department ID is null");
@@ -129,7 +128,7 @@ public class EmployeeService {
         if (employeeUpdateDTO.getPassword() != null && !employeeUpdateDTO.getPassword().isEmpty()) {
             employeeUpdateDTO.setPassword(bc.encode(employeeUpdateDTO.getPassword()));
         }
-        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.ADMIN.toString())) {
+        if (SpringSecurityUtil.getCurrentEmployeeRole().equals(EmployeeRole.SUPERADMIN.toString())) {
             return updateAdmin(id, employeeUpdateDTO);
         }
         if (SpringSecurityUtil.getCurrentUserId().equals(id)){

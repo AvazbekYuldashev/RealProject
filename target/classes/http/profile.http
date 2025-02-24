@@ -1,5 +1,5 @@
 ### Registration API Test
-POST https://localhost:8080/profile/registration
+POST https://rttm.astiedu.uz/api/profile/registration
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Authorization API Test
-POST http://rttm.astiedu.uz/api/profile/authorization
+POST https://rttm.astiedu.uz/api/profile/authorization
 Content-Type: application/json
 
 {

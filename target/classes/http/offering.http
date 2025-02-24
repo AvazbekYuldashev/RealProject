@@ -1,11 +1,11 @@
 ### Xizmat yaratish
-POST http://rttm.astiedu.uz/offering
+POST https://rttm.astiedu.uz/api/offering
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInZpc2libGUiOnRydWUsInN1cm5hbWUiOiIyMzQiLCJuYW1lIjoiM3IyIiwiaWQiOjEzLCJwb3NpdGlvbiI6IjIzNCIsImVtYWlsIjoiMTIzNDVAZ21haWwuY29tIiwic3RhdHVzIjoiQUNUSVZFIiwic3ViIjoiMTIzNDVAZ21haWwuY29tIiwiaWF0IjoxNzQwMDg2NDU5LCJleHAiOjE3NDAxNzI4NTl9.pKrku2XR-bnkJUzKsWxUGdwQphDcg0tyWs-m0z8O4ck
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiU1VQRVJBRE1JTiIsInZpc2libGUiOnRydWUsInN1cm5hbWUiOiJZdWxkYXNoZXYiLCJkZXBhcnRtZW50SWQiOjEsIm5hbWUiOiJBdmF6YmVrIiwiaWQiOjEsInBvc2l0aW9uIjoiV2ViLWRpemF5bmVyIiwiZW1haWwiOiJhdmF6YmVrLnl1bGRhc2hldkBleGFtcGxlLmNvbSIsInN0YXR1cyI6IkFDVElWRSIsInN1YiI6ImF2YXpiZWsueXVsZGFzaGV2QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQwMzEyMDE1LCJleHAiOjE3NDAzOTg0MTV9.rtYWEKiDtIjku1xUZHEDroj2gFjmUDuClHuYwzxAD6Q
 
 {
-  "title": "Sample Service",
-  "description": "This is a sample offering",
+  "title": "Katrij zaprafka qlish",
+  "description": "Katrijni sfatili zaprafka qlib beramiz ",
   "departmentId": 1
 }
 

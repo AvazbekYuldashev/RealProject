@@ -3,7 +3,6 @@ package com.example.department_management_system.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 /// Xizmatlar
