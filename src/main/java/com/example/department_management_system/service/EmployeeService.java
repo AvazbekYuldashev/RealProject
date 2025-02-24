@@ -51,7 +51,6 @@ public class EmployeeService {
     ///  Get Employee By Id
     public EmployeeMapper getById(Integer id) {
         checkAdminAccess();
-        chekSuperAdminAccess();
         return employeeRepository.findByIdMapper(id).orElseThrow(() -> new AppBadRequestExeption("Employee not found with id: " + id));
     }
     public EmployeeMapper getMe() {
