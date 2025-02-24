@@ -35,7 +35,7 @@ public class OfferingController {
         return new ResponseEntity<>(getAll, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<OfferingMapper> getOfferingById(@PathVariable("id") Integer id) {
         OfferingMapper byId = offeringService.getById(id);
